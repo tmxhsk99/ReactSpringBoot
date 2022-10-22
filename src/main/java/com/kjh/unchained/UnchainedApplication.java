@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JspaframebootApplication {
+public class UnchainedApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JspaframebootApplication.class, args);
+		SpringApplication.run(UnchainedApplication.class, args);
 	}
 
 }

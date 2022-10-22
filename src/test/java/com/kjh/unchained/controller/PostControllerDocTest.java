@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs(uriScheme = "https", uriHost = "api.jspaframeboot.com", uriPort = 443)
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "api.unchained.com", uriPort = 443)
 @ExtendWith(RestDocumentationExtension.class)
 public class PostControllerDocTest {
     //참고 : https://docs.spring.io/spring-restdocs/docs/current/reference/html5/

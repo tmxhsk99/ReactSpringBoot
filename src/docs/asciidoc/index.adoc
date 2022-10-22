@@ -1,4 +1,4 @@
-= jspaframework API
+= Unchained API
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
