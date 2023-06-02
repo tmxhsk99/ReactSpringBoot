@@ -45,24 +45,24 @@ export const cardImgList = [
         id:0,
         name:"피카츄",
         description: "양 볼에는 전기를 저장하는 주머니가 있다. 화가 나면 저장한 전기를 단숨에 방출한다.",
-        img: getCardImagById(0),
+        imgSrc: getCardImagById(0),
     },
     {
         id:1,
         name:"이상해꽃",
         description: "햇빛을 쬐어 몸이 따뜻해지면 꽃잎에서 기분 좋은 향기가 퍼진다.",
-        img: getCardImagById(1),
+        imgSrc: getCardImagById(1),
     },
     {
         id:2,
         name:"리자몽",
         description: "날개로 넓은 하늘을 높게 난다. 싸움의 경험을 쌓으면 불꽃의 온도가 높아진다.",
-        img: getCardImagById(2),
+        imgSrc: getCardImagById(2),
     },
     {
         id:3,
         name:"거북왕",
         description: "등의 분사구에서 기세좋게 물을 내뿜을 때 힘좋게 대지를 딛는다.",
-        img: getCardImagById(3),
+        imgSrc: getCardImagById(3),
     },
 ];

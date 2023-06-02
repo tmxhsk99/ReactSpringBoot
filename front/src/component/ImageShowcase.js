@@ -18,7 +18,7 @@ const ImageShowcase = ({title, subTitle, cardImgList}) => {
                             return (
                                 <li>
                                     <div className="img_wrap">
-                                        <img alt={cardImg.name} src={cardImg.img}/>
+                                        <img alt={cardImg.name} src={cardImg.imgSrc}/>
                                     </div>
                                     <p className="cont_txt">{cardImg.description}</p>
                                 </li>
