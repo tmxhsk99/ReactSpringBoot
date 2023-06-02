@@ -1,0 +1,17 @@
+header{
+    height: 100px;
+}
+
+header .inner{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+.nav{
+    display: flex;
+}
+.nav li{
+    margin-left: 63px;
+}
