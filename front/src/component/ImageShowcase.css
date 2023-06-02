@@ -22,7 +22,10 @@
     height: 100%;
 }
 
-.image-showcase_list .txt_wrap{
+.image-showcase .txt_wrap{
     margin-bottom: 116px;
 }
 
+.image-showcase_list li .cont_txt {
+    margin-top: 23px;
+}
