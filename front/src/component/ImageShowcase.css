@@ -1,0 +1,28 @@
+.image-showcase{
+    position: relative;
+
+}
+.image-showcase_list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-showcase_list li {
+    width: calc(100% / 4 - 27px);
+}
+.image-showcase_list li .img_wrap{
+    height: 272px;
+    background-color: #ccc;
+}
+.image-showcase_list li .img_wrap img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image-showcase_list .txt_wrap{
+    margin-bottom: 116px;
+}
+
