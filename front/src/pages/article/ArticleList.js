@@ -3,3 +3,5 @@ const ArticleList = () => {
         <div>Article List 페이지</div>
     )
 }
+
+export default ArticleList;
