@@ -1,20 +1,20 @@
-.image-showcase{
+.ImageShowcase{
     position: relative;
 
 }
-.image-showcase_list {
+.ImageShowcase_list {
     display: flex;
     justify-content: space-between;
 }
 
-.image-showcase_list li {
+.ImageShowcase_list li {
     width: calc(100% / 4 - 27px);
 }
-.image-showcase_list li .img_wrap{
+.ImageShowcase_list li .img_wrap{
     height: 272px;
     background-color: #ccc;
 }
-.image-showcase_list li .img_wrap img {
+.ImageShowcase_list li .img_wrap img {
     position: relative;
     top: 0;
     left: 0;
@@ -22,10 +22,10 @@
     height: 100%;
 }
 
-.image-showcase .txt_wrap{
+.ImageShowcase .txt_wrap{
     margin-bottom: 116px;
 }
 
-.image-showcase_list li .cont_txt {
+.ImageShowcase_list li .cont_txt {
     margin-top: 23px;
 }

@@ -2,7 +2,7 @@ import "./ImageShowcase.css";
 
 const ImageShowcase = ({title, subTitle, cardImgList}) => {
     return (
-        <div className="depth image-showcase">
+        <div className="depth ImageShowcase">
             <div className="inner">
                 <div className="txt_wrap txt_center">
                     <h2 className="tit_small">
@@ -12,7 +12,7 @@ const ImageShowcase = ({title, subTitle, cardImgList}) => {
                         {subTitle}
                     </p>
                 </div>
-                <ul className="image-showcase_list txt_center">
+                <ul className="ImageShowcase_list txt_center">
                     {
                         cardImgList.map((cardImg) => {
                             return (
