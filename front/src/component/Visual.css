@@ -1,0 +1,19 @@
+.visual {
+    height: 644px;
+    background-color: gray;
+    position: relative;
+}
+
+.visu_txt {
+    position: relative;
+    top: 0;
+    left: calc(50% + 40px);
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.sub_txt{
+    margin:16px 0;
+}
