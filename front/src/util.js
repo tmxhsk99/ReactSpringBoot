@@ -113,3 +113,33 @@ export const titleImgList = [
         imgSrc: getTitleImg(3),
     }
 ];
+export const interfaceList = [
+    {
+        id: 0,
+        title: "가방",
+        description: "도구를 사용하여 포켓몬을 보조하자!",
+        imgSrc: getInterfaceImg(0),
+        imgLink: "/",
+    },
+    {
+        id: 1,
+        title: "도감",
+        description: "1000종류가 넘는 포켓몬을 도감에 기록하자!",
+        imgSrc: getInterfaceImg(1),
+        imgLink: "/",
+    },
+    {
+        id: 2,
+        title: "트레이너",
+        description: "자신만의 포켓몬으로 여러 트레이너와 대결하자!",
+        imgSrc: getInterfaceImg(2),
+        imgLink: "/",
+    },
+    {
+        id: 3,
+        title: "포켓몬 배틀",
+        description: "적절한 기술을 사용하여 배틀에서 승리하자!",
+        imgSrc: getInterfaceImg(3),
+        imgLink: "/",
+    },
+];
