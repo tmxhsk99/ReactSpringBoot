@@ -2,9 +2,10 @@ import Header from "../component/Header";
 import Visual from "../component/Visual";
 import ImageShowcase from "../component/ImageShowcase";
 import ImageTextCard from "../component/ImageTextCard";
-import {cardImgList,titleImgList,interfaceList} from "../util";
+import {cardImgList,titleImgList,interfaceList,personList} from "../util";
 import ImageShowcaseDetail from "../component/ImageShowcaseDetail";
 import ImageTextCardReverse from "../component/ImageTextCardReverse";
+import ImageShowcaseCircle from "../component/ImageShowcaseCircle";
 
 const Home = () => {
 
@@ -70,6 +71,13 @@ const Home = () => {
                 imgInfo={titleImgList[2]}
                 buttonText={"바로가기"}
                 linkAddress={"/article/add"}
+            />
+            <ImageShowcaseCircle
+                title={"Former Director"}
+                description={"1st generation to 9th generation"}
+                btnText={"상세보기"}
+                btnLink={"/"}
+                imageInfos={personList}
             />
         </>
     );

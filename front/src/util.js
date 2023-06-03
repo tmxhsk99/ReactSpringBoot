@@ -10,6 +10,9 @@ import interface0 from "./assets/img/home/interface0.png"
 import interface1 from "./assets/img/home/interface1.png"
 import interface2 from "./assets/img/home/interface2.png"
 import interface3 from "./assets/img/home/interface3.png"
+import person0 from "./assets/img/home/taziri.png";
+import person1 from "./assets/img/home/masda.png";
+import person2 from "./assets/img/home/oomori.png";
 
 
 export const getCardImagById = (imgId) => {
@@ -58,6 +61,19 @@ export const getInterfaceImg = (imgId) => {
             return null;
     }
 }
+export const getPersonImg = (imgId) => {
+    const targetPersonId = String(imgId);
+    switch (targetPersonId) {
+        case "0":
+            return person0;
+        case "1":
+            return person1;
+        case "2":
+            return person2;
+        default:
+            return null;
+    }
+};
 export const cardImgList = [
     {
         id: 0,
@@ -142,4 +158,22 @@ export const interfaceList = [
         imgSrc: getInterfaceImg(3),
         imgLink: "/",
     },
+];
+export const personList = [
+    {
+        id: 0,
+        description: "Tajiri Satoshi",
+        imgSrc: getPersonImg(0),
+    },
+    {
+        id: 1,
+        description: "Masuda Junichi",
+        imgSrc: getPersonImg(1),
+    },
+    {
+        id: 2,
+        description: "Shigeru Ohmori",
+        imgSrc: getPersonImg(2),
+    }
+
 ];
