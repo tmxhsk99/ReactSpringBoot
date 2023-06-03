@@ -1,11 +1,11 @@
-import Header from "../component/Header";
-import Visual from "../component/Visual";
-import ImageShowcase from "../component/ImageShowcase";
-import ImageTextCard from "../component/ImageTextCard";
+import Header from "../component/common/Header";
+import Visual from "../component/home/Visual";
+import ImageShowcase from "../component/home/ImageShowcase";
+import ImageTextCard from "../component/home/ImageTextCard";
 import {cardImgList,titleImgList,interfaceList,personList} from "../util";
-import ImageShowcaseDetail from "../component/ImageShowcaseDetail";
-import ImageTextCardReverse from "../component/ImageTextCardReverse";
-import ImageShowcaseCircle from "../component/ImageShowcaseCircle";
+import ImageShowcaseDetail from "../component/home/ImageShowcaseDetail";
+import ImageTextCardReverse from "../component/home/ImageTextCardReverse";
+import ImageShowcaseCircle from "../component/home/ImageShowcaseCircle";
 
 const Home = () => {
 
