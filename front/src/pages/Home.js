@@ -6,6 +6,7 @@ import {cardImgList,titleImgList,interfaceList,personList} from "../util";
 import ImageShowcaseDetail from "../component/home/ImageShowcaseDetail";
 import ImageTextCardReverse from "../component/home/ImageTextCardReverse";
 import ImageShowcaseCircle from "../component/home/ImageShowcaseCircle";
+import Footer from "../component/common/Footer";
 
 const Home = () => {
 
@@ -78,6 +79,10 @@ const Home = () => {
                 btnText={"상세보기"}
                 btnLink={"/"}
                 imageInfos={personList}
+            />
+            <Footer
+                title={"레트로그"}
+                menus={menus}
             />
         </>
     );
