@@ -18,7 +18,7 @@ const ImageShowcaseCircle = ({title, description, btnLink, btnText, imageInfos})
                     {
                         imageInfos.map((imageInfo) => {
                             return (
-                                <li>
+                                <li key={imageInfo.id}>
                                     <div className="img_wrap">
                                         <img alt={imageInfo.description} src={imageInfo.imgSrc}/>
                                     </div>

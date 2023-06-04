@@ -21,8 +21,7 @@ const ImageShowcaseDetail = ({title, description, buttonText, imgInfos, linkAddr
                     {
                         imgInfos.map((imgInfo) => {
                             return (
-                                <>
-                                    <li>
+                                    <li key={imgInfo.id}>
                                         <Link to={imgInfo.imgLink}>
                                             <h4>{imgInfo.title}</h4>
                                             <p className="list_txt">{imgInfo.description}</p>
@@ -31,8 +30,6 @@ const ImageShowcaseDetail = ({title, description, buttonText, imgInfos, linkAddr
                                             </div>
                                         </Link>
                                     </li>
-
-                                </>
                             )
                         })
                     }

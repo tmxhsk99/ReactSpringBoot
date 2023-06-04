@@ -1,17 +1,109 @@
-header{
-    height: 100px;
+header {
+    height: 83px;
 }
 
-header .inner{
+header .inner {
     display: flex;
     justify-content: space-between;
     height: 100%;
     align-items: flex-end;
     padding-bottom: 20px;
 }
-.nav{
+
+.nav {
     display: flex;
 }
-.nav li{
+
+.nav li {
     margin-left: 63px;
+}
+
+.navBtn {
+    display: none;
+}
+
+@media screen and (max-width: 899px) {
+    header {
+        height: 57px;
+    }
+
+    h1 {
+        font-size: 2.555rem;
+    }
+
+    .navBtn {
+        display: block;
+        width: 28px;
+        height: 22px;
+        position: relative;
+    }
+
+    .navBtn span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        display: block;
+        transition: all .3s;
+    }
+
+    .navBtn span:nth-child(1) {
+        top: 0;
+    }
+
+    .navBtn span:nth-child(2) {
+        top: calc(50% - 1.5px);
+    }
+
+    .navBtn span:nth-child(3) {
+        top: 19px;
+
+    }
+
+    header.active .navBtn span:nth-child(1) {
+        top: calc(50% - 1.5px);
+        transform: rotate(45deg);
+    }
+
+    header.active .navBtn span:nth-child(2) {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    header.active .navBtn span:nth-child(3) {
+        top: calc(50% - 1.5px);
+        transform: rotate(-45deg);
+    }
+
+    header .nav {
+        position: fixed;
+        top: 58px;
+        width: 100vw;
+        z-index: 5;
+        flex-direction: column;
+        height: calc(100% - 57px);
+        background-color: #eeeeee;
+        right: -110%;
+        justify-content: center;
+        align-items: center;
+        transition: right .3s ease-in-out;
+    }
+
+    header.active .nav {
+        right: 0;
+    }
+
+    header .nav li {
+        margin-left: 0;
+        border-bottom: 1px solid #cccccc;
+        padding: 30px;
+        margin-bottom: 20px;
+
+    }
+
+    header .nav li a {
+        font-size: 4rem;
+
+    }
 }

@@ -16,7 +16,7 @@ const ImageShowcase = ({title, subTitle, cardImgList}) => {
                     {
                         cardImgList.map((cardImg) => {
                             return (
-                                <li>
+                                <li key={cardImg.id}>
                                     <div className="img_wrap">
                                         <img alt={cardImg.name} src={cardImg.imgSrc}/>
                                     </div>
