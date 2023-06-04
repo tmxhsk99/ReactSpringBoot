@@ -33,3 +33,26 @@
     justify-content: space-between;
     align-items: center;
 }
+@media screen and (max-width:899px){
+    .ImageTextCardReverse .img_wrap {
+        width: 80vw;
+        height: 80vw;
+        background-color: #cccccc;
+        margin: auto;
+        border-radius: 30px;
+        overflow: hidden;
+        order: 2;
+
+    }
+
+    .ImageTextCardReverse .inner {
+        flex-direction: column;
+        height: 150vw;
+    }
+
+    .ImageTextCardReverse .txt_wrap {
+        margin-bottom: 45px;
+        order: 1;
+        height: 40vw;
+    }
+}
