@@ -8,3 +8,15 @@ footer .inner {
     justify-content: space-between;
     align-items: center;
 }
+@media screen and (max-width: 899px) {
+    footer{
+        padding:40px 0px;
+    }
+    footer .nav {
+        display: none;
+    }
+    footer .inner {
+        justify-content: center;
+        text-align: center;
+    }
+}
