@@ -1,4 +1,4 @@
-import "./ImageShowCaseCircle.css";
+import "./ImageShowcaseCircle.css";
 import {Link} from "react-router-dom";
 
 const ImageShowcaseCircle = ({title, description, btnLink, btnText, imageInfos}) => {
