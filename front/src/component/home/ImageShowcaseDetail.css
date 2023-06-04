@@ -83,3 +83,27 @@
         padding: 40px 20px 20px;
     }
 }
+@media screen and (max-width:599px){
+    .ImageShowcaseDetail_list{
+        justify-content: center;
+    }
+    .ImageShowcaseDetail_list li{
+        width: 80vw;
+        height: auto;
+    }
+    .ImageShowcaseDetail_list li:nth-child(4) {
+        margin-top: 0;
+    }
+    .ImageShowcaseDetail_list li:nth-child(3) {
+        margin-bottom: 50px;
+    }
+    .ImageShowcaseDetail_list li:nth-child(1) {
+        margin-top: 0;
+    }
+    .ImageShowcaseDetail_list .img_wrap {
+        height: 50vw;
+        min-width: 200px;
+        margin-top: 20px;
+
+    }
+}

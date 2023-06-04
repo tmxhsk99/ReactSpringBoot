@@ -129,3 +129,14 @@ a.cont_btn:after {
     font-weight: 200;
 
 }
+@media screen and (max-width:599px){
+    h2.tit_big{
+      font-size:5.2rem
+    }
+    p.sub_txt{
+      font-size:1.555rem;
+    }
+    .depth{
+      padding:80px 15px;
+    }
+}

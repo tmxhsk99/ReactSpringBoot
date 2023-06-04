@@ -50,3 +50,8 @@
         margin-top: 15px;
     }
 }
+@media screen and (max-width:599px){
+    .ImageShowcase li .img_wrap{
+        height: 40vw;
+    }
+}
