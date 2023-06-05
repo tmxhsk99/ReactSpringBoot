@@ -9,11 +9,12 @@ spring:
       path: /h2-console
 
   datasource:
-    url: jdbc:h2:mem:jspaframeboot
+    url: jdbc:h2:mem:testdb
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+  jpa:
+    open-in-view: false
 #  data:
 #    web:
 #      pageable:
