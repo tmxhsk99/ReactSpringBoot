@@ -14,7 +14,24 @@ import person0 from "./assets/img/home/taziri.png";
 import person1 from "./assets/img/home/masda.png";
 import person2 from "./assets/img/home/oomori.png";
 
-
+export const SITE_NAME = "레트로그";
+export const DEFAULT_MENU = [
+    {
+        id: 0,
+        url: "/",
+        text: "홈"
+    },
+    {
+        id: 1,
+        url: "/article/list",
+        text: "글 리스트"
+    },
+    {
+        id: 2,
+        url: "/article/add",
+        text: "새글 쓰기 "
+    }
+]
 export const getCardImagById = (imgId) => {
     const targetCardId = String(imgId);
     switch (targetCardId) {

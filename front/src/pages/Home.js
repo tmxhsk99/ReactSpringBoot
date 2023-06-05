@@ -2,48 +2,18 @@ import Header from "../component/common/Header";
 import Visual from "../component/home/Visual";
 import ImageShowcase from "../component/home/ImageShowcase";
 import ImageTextCard from "../component/home/ImageTextCard";
-import {cardImgList,titleImgList,interfaceList,personList} from "../util";
+import {SITE_NAME, cardImgList, titleImgList, interfaceList, personList, DEFAULT_MENU} from "../util";
 import ImageShowcaseDetail from "../component/home/ImageShowcaseDetail";
 import ImageTextCardReverse from "../component/home/ImageTextCardReverse";
 import ImageShowcaseCircle from "../component/home/ImageShowcaseCircle";
 import Footer from "../component/common/Footer";
 
 const Home = () => {
-
-    const event = () => {
-        console.log("이벤트 발생");
-    }
-    const menus = [
-        {
-            id: 0,
-            onClick: event,
-            url: "/",
-            text: "홈"
-        },
-        {
-            id: 1,
-            onClick: event,
-            url: "/article/list",
-            text: "글 리스트"
-        },
-        {
-            id: 2,
-            onClick: event,
-            url: "/article/add",
-            text: "새글 쓰기 "
-        },
-        {
-            id: 3,
-            onClick: event,
-            url: "/article/detail",
-            text: "상세 글보기 "
-        }
-    ]
     return (
         <>
             <Header
-                title={"레트로그"}
-                menus={menus}
+                title={SITE_NAME}
+                menus={DEFAULT_MENU}
             />
             <Visual/>
             <ImageShowcase
@@ -81,8 +51,8 @@ const Home = () => {
                 imageInfos={personList}
             />
             <Footer
-                title={"레트로그"}
-                menus={menus}
+                title={SITE_NAME}
+                menus={DEFAULT_MENU}
             />
         </>
     );
