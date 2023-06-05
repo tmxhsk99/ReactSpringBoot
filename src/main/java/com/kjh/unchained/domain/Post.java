@@ -26,11 +26,6 @@ public class Post {
         this.content = content;
     }
 
-    /*
-        public void change(String title ,String content){
-            this.title = title;
-            this.content = content;
-        }*/
     public PostEditor.PostEditorBuilder toEditor() {
         return PostEditor.builder()
                 .title(this.title)
