@@ -79,8 +79,6 @@ public class PostService {
     // DB -> 애플리케이션 서버를 전달하는 시간  , 트래픽 비용등이 많이 발생할 수 있다.
     // 그러므로 전체 페이지에서 해당 원하는 페이지 값 리턴하도록 변경
     public List<PostResponse> getList(PostSearch postSearch) {
-
-
         return postRepository.getList(postSearch).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
