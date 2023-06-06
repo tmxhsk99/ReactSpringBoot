@@ -4,6 +4,7 @@ package com.kjh.unchained.response;
 import com.kjh.unchained.domain.Post;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  서비스 정책에 맞는 PostResponse
@@ -11,6 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder
+@ToString
 public class PostResponse {
     private final Long id;
     private final String title;
