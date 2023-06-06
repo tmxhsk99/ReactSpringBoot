@@ -1,20 +1,18 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
-import {SITE_NAME, DEFAULT_MENU} from "../../util";
+import {SITE_NAME, DEFAULT_MENU,ARTICLE_API_DOMAIN} from "../../util";
 import ArticleHeader from "../../component/article/ArticleHeader";
+import useArticle from "../../component/hooks/useArticle";
 import {useEffect} from "react";
-const fetchArticle = async (page,size,title,content) => {
-    const API_DOMAIN = "http://localhost:8080";
-    const response = await fetch(`${API_DOMAIN}/posts?page=${page}&size=${size}&title=${title}&content=${content}`);
-    const responseJson = await response.json();
-    return responseJson;
-};
 
 const Article = () => {
-    useEffect(()=>{
-        const posts = fetchArticle();
-        console.log(posts);
-    },[])
+    const [state, refetch] = useArticle(1, 10);
+    const {loading, data, error} = state;
+    console.log("loading : " + loading);
+    console.log("data : " + data);
+    console.dir(data);
+    console.log("error :" + error);
+
     return (
         <>
             <Header
