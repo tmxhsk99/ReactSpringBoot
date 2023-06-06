@@ -14,6 +14,7 @@ import person0 from "./assets/img/home/taziri.png";
 import person1 from "./assets/img/home/masda.png";
 import person2 from "./assets/img/home/oomori.png";
 
+export const ARTICLE_API_DOMAIN = "http://localhost:8080";
 export const SITE_NAME = "레트로그";
 export const DEFAULT_MENU = [
     {
