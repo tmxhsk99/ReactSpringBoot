@@ -1,7 +1,7 @@
 package com.kjh.unchained.controller;
 
-import com.kjh.unchained.request.PostCreateDto;
-import com.kjh.unchained.request.PostEditDto;
+import com.kjh.unchained.request.PostCreate;
+import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
 import com.kjh.unchained.response.PostResponse;
 import com.kjh.unchained.service.PostService;
@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @PatchMapping("/posts/{postId}")
-    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEditDto request){
+    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request){
         return postService.edit(postId, request);
     }
     /**
@@ -64,7 +64,7 @@ public class PostController {
      * @throws Exception
      */
     @PostMapping("/posts/save")
-    public void posts_save(@RequestBody @Valid PostCreateDto request) throws Exception {
+    public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
         // Case1. 저장한 데이터 Entity ->response로 응답하기
         // Case2. 저장한 데이터 의 primary_id -> response로 응답하기
         //      Client 에서는 수신한 id를 글 조회 API를 통해서 데이터르 수신 받음
@@ -103,7 +103,7 @@ public class PostController {
      * 위와 동일하지만 해당 값에대한 클래스를 만들어 받는 경우
      */
     @PostMapping("/posts_recv_object")
-    public String posts_recv_object(PostCreateDto postCreateDto) {
+    public String posts_recv_object(PostCreate postCreateDto) {
         log.info("params={}", postCreateDto.toString());
         return "Hello world";
     }
@@ -115,7 +115,7 @@ public class PostController {
     // 4. DB에 값을 저장할 때 의도치 않은 오류 가 발생 할 수 있다.
     // 5. 서버 개발자의 편안 함을 위해서
     @PostMapping("/posts_json")
-    public Map<String, String> posts_json(@RequestBody @Valid PostCreateDto params, BindingResult result) throws Exception {
+    public Map<String, String> posts_json(@RequestBody @Valid PostCreate params, BindingResult result) throws Exception {
         if (result.hasErrors()) {
             List<FieldError> fieldErrors = result.getFieldErrors();
             Map<String, String> errorMap = new HashMap<>();
@@ -144,7 +144,7 @@ public class PostController {
 //        }
 
     @PostMapping("/posts_use_controller_advice")
-    public Map<String, String> posts_use_controller_advice(@RequestBody @Valid PostCreateDto params) throws Exception {
+    public Map<String, String> posts_use_controller_advice(@RequestBody @Valid PostCreate params) throws Exception {
 
         return new HashMap<>();
     }

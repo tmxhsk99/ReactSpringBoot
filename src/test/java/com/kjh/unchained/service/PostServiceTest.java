@@ -2,9 +2,9 @@ package com.kjh.unchained.service;
 
 import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.exception.PostNotFound;
-import com.kjh.unchained.repository.PostRepository;
-import com.kjh.unchained.request.PostCreateDto;
-import com.kjh.unchained.request.PostEditDto;
+import com.kjh.unchained.repository.jpa.PostRepository;
+import com.kjh.unchained.request.PostCreate;
+import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
 import com.kjh.unchained.response.PostResponse;
 import org.junit.jupiter.api.Assertions;
@@ -86,7 +86,7 @@ class PostServiceTest {
 
         postRepository.save(post);
 
-        PostEditDto postEditDto = PostEditDto.builder()
+        PostEdit postEditDto = PostEdit.builder()
                 .title("kjh")
                 .content("content2")
                 .build();
@@ -113,7 +113,7 @@ class PostServiceTest {
 
         postRepository.save(post);
 
-        PostEditDto postEditDto = PostEditDto.builder()
+        PostEdit postEditDto = PostEdit.builder()
                 .title("수정 테스트 제목")
                 .content("content2")
                 .build();
@@ -142,7 +142,7 @@ class PostServiceTest {
 
         postRepository.save(post);
 
-        PostEditDto postEditDto = PostEditDto.builder()
+        PostEdit postEditDto = PostEdit.builder()
                 .title("수정 테스트 제목")
                 .build();
 
@@ -228,7 +228,7 @@ class PostServiceTest {
     @DisplayName("PostService 글 작성 테스트")
     void post_save_test() {
         //given
-        PostCreateDto post = PostCreateDto.builder()
+        PostCreate post = PostCreate.builder()
                 .title("제목입니다.")
                 .content("내용입니다.")
                 .build();

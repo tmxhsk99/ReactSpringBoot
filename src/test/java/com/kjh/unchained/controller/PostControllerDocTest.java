@@ -2,8 +2,8 @@ package com.kjh.unchained.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.domain.Post;
-import com.kjh.unchained.repository.PostRepository;
-import com.kjh.unchained.request.PostCreateDto;
+import com.kjh.unchained.repository.jpa.PostRepository;
+import com.kjh.unchained.request.PostCreate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -69,7 +69,7 @@ public class PostControllerDocTest {
     @DisplayName("글 등록 테스트")
     void RestDocsTest_post_save() throws Exception {
         //given
-        PostCreateDto request = PostCreateDto.builder()
+        PostCreate request = PostCreate.builder()
                 .title("글제목")
                 .content("content")
                 .build();

@@ -1,4 +1,4 @@
-package com.kjh.unchained.repository;
+package com.kjh.unchained.repository.jpa;
 
 import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.domain.QPost;

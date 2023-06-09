@@ -2,10 +2,10 @@ package com.kjh.unchained.service;
 
 import com.kjh.unchained.domain.PostEditor;
 import com.kjh.unchained.exception.PostNotFound;
-import com.kjh.unchained.repository.PostRepository;
+import com.kjh.unchained.repository.jpa.PostRepository;
 import com.kjh.unchained.domain.Post;
-import com.kjh.unchained.request.PostCreateDto;
-import com.kjh.unchained.request.PostEditDto;
+import com.kjh.unchained.request.PostCreate;
+import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
 import com.kjh.unchained.response.PostResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional //Transactional이 있어야 업데이트가 된다...
-    public PostResponse edit(Long id , PostEditDto postEditDto){
+    public PostResponse edit(Long id , PostEdit postEditDto){
 
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFound());
@@ -45,7 +45,7 @@ public class PostService {
         return new PostResponse(post);
     }
 
-    public Long write(PostCreateDto postCreateDto){
+    public Long write(PostCreate postCreateDto){
         // postCreate -> Entity
         Post post = Post.builder()
                 .title(postCreateDto.getTitle())

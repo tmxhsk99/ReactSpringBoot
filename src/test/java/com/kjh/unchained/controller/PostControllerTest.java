@@ -2,9 +2,9 @@ package com.kjh.unchained.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.domain.Post;
-import com.kjh.unchained.repository.PostRepository;
-import com.kjh.unchained.request.PostCreateDto;
-import com.kjh.unchained.request.PostEditDto;
+import com.kjh.unchained.repository.jpa.PostRepository;
+import com.kjh.unchained.request.PostCreate;
+import com.kjh.unchained.request.PostEdit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,7 +48,7 @@ class PostControllerTest {
     @DisplayName("글 작성시 제목에 '바보'는 포함 될 수 없다. ")
     public void ExceptionTest() throws Exception {
         //given
-        PostCreateDto request = PostCreateDto.builder()
+        PostCreate request = PostCreate.builder()
                 .title("kjh 바보")
                 .content("content")
                 .build();
@@ -96,7 +96,7 @@ class PostControllerTest {
         postRepository.save(post);
 
 
-        PostEditDto postEdit = PostEditDto.builder()
+        PostEdit postEdit = PostEdit.builder()
                 .title("김주현")
                 .content("content")
                 .build();
@@ -169,7 +169,7 @@ class PostControllerTest {
     @DisplayName("/posts 요청시 DB에 값이 저장된다.")
     void sendJson_db_save() throws Exception {
         //given
-        PostCreateDto request = PostCreateDto
+        PostCreate request = PostCreate
                                 .builder()
                                 .title("제목입니다.")
                                 .content("내용입니다.")
@@ -199,7 +199,7 @@ class PostControllerTest {
     @DisplayName("/posts 요청시 ControllerAdvice. 에러 확인 테스트")
     void sendJson_use_controller_advice() throws Exception {
 
-        PostCreateDto request = PostCreateDto
+        PostCreate request = PostCreate
                 .builder()
                 .content("내용입니다.")
                 .build();
@@ -221,7 +221,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts 요청시 title 값은 필수다.")
     void sendJson_required_title() throws Exception {
-        PostCreateDto request = PostCreateDto
+        PostCreate request = PostCreate
                 .builder()
                 .content("내용입니다.")
                 .build();
@@ -251,7 +251,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts_json 로 post 요청 contentType = APPLICATION_JSON , content에 실제 내용 설정")
     void sendJson() throws Exception {
-        PostCreateDto request = PostCreateDto
+        PostCreate request = PostCreate
                 .builder()
                 .title("제목입니다.")
                 .content("내용입니다.")

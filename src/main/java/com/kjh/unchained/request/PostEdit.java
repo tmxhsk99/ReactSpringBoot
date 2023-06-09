@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Builder
 @ToString
-public class PostEditDto {
+public class PostEdit {
     private Long id;
 
     @NotBlank(message = "타이틀을 입력해주세요.")
@@ -19,10 +19,10 @@ public class PostEditDto {
     @NotBlank(message = "내용를 입력해주세요")
     private String content;
 
-    public PostEditDto() {
+    public PostEdit() {
     }
 
-    public PostEditDto(Long id, String title, String content) {
+    public PostEdit(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
