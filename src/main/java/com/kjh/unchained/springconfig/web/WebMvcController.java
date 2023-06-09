@@ -1,4 +1,4 @@
-package com.kjh.unchained.config;
+package com.kjh.unchained.springconfig.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
