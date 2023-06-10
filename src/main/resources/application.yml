@@ -3,16 +3,13 @@ server:
     encoding:
       force-response: true
 spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    path: /h2-console
+
   h2:
     console:
       enabled: true
-      path: /h2-console
-      initialization-mode: always
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
 
   jpa:
     open-in-view: false
