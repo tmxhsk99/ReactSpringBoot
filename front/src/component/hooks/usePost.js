@@ -14,9 +14,7 @@ const usePost = (page = 1, size = 10, deps = [], skip = false) => {
             .catch(error => console.log(error.message));
     }
 
-    const [state, refetch] = useArticleAsync(getArticle, [],skip);
-
-    return [state, refetch];
+    return [state, refetch] = useArticleAsync(getArticle, [],skip);
 }
 
 export default usePost;
