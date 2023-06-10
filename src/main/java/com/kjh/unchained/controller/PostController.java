@@ -32,18 +32,18 @@ public class PostController {
     public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request){
         return postService.edit(postId, request);
     }
+
     /**
      *
      * @param postSearch
      * @return
      */
     @GetMapping("/posts")
-    public List<PostResponse> getList(@ModelAttribute PostSearch postSearch) {
+    public List<PostResponse> getList(@ModelAttribute @Valid PostSearch postSearch) {
         log.info("[PostController:/post]"+ postSearch.toString());
         List<PostResponse> result = postService.getList(postSearch);
         log.info("[PostController:result]"+ result.toString());
         return result;
-
     }
 
     /**

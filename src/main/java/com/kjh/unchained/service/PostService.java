@@ -59,12 +59,7 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() ->  new PostNotFound());
 
-        PostResponse response = PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .build();
-
+        PostResponse response = new PostResponse(post);
         /**
          * 서비스의 크기가 커지면
          * controller -> WebService -(내부적 파싱 )> Repository
