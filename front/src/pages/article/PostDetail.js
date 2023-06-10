@@ -1,7 +1,7 @@
-const ArticleDetail = () =>{
+const PostDetail = () =>{
     return (
         <div>ArticleDetail 페이지</div>
     )
 }
 
-export default ArticleDetail;
+export default PostDetail;

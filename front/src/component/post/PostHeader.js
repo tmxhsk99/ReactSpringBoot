@@ -1,6 +1,6 @@
-import "./ArticleHeader.css";
+import "./PostHeader.css";
 
-const ArticleHeader = ({title}) => {
+const PostHeader = ({title}) => {
     return(
         <section className="ArticleHeader">
             <h3>{title}</h3>
@@ -8,4 +8,4 @@ const ArticleHeader = ({title}) => {
     )
 }
 
-export default ArticleHeader;
+export default PostHeader;

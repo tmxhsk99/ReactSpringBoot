@@ -1,12 +1,12 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
 import {SITE_NAME, DEFAULT_MENU,ARTICLE_API_DOMAIN} from "../../util";
-import ArticleHeader from "../../component/article/ArticleHeader";
-import useArticle from "../../component/hooks/useArticle";
+import PostHeader from "front/src/component/post/PostHeader";
+import usePost from "../../component/hooks/usePost";
 import {useEffect} from "react";
 
-const Article = () => {
-    const [state, refetch] = useArticle(1, 10);
+const Post = () => {
+    const [state, refetch] = usePost(1, 10);
     const {loading, data, error} = state;
     console.log("loading : " + loading);
     console.log("data : " + data);
@@ -20,7 +20,7 @@ const Article = () => {
                 menus={DEFAULT_MENU}/>
             <div className="inner">
                 <div className="nes-container is-dark with-title">
-                    <ArticleHeader
+                    <PostHeader
                         title={"전체 글"}
                     />
                 </div>
@@ -34,4 +34,4 @@ const Article = () => {
     )
 }
 
-export default Article;
+export default Post;

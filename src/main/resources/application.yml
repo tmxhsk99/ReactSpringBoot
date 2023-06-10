@@ -7,16 +7,21 @@ spring:
     console:
       enabled: true
       path: /h2-console
-
+      initialization-mode: always
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
   jpa:
     open-in-view: false
-#  data:
-#    web:
-#      pageable:
-#        one-indexed-parameters: true
-#        default-page-size: 5
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: create
+        show_sql: true
+        format_sql: true
+        logging.level:
+        org.hibernate.SQL: debug
+    defer-datasource-initialization: true

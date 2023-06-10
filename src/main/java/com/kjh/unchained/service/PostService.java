@@ -33,7 +33,7 @@ public class PostService {
         PostEditor.PostEditorBuilder editorBuilder = post.toEditor();
 
         //검증을 해야된다..
-        //1. if문으로 있는지업는지 검사해서 타게한다.
+        //1. if 문으로 있는지업는지 검사해서 타게한다.
         //2. 그냥 넘길때 기존업데이트 안되는 정보를 넘기게한다 (요걸 선호)
         PostEditor postEditor = editorBuilder
                 .title(postEditDto.getTitle())

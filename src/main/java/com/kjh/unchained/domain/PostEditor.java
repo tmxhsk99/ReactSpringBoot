@@ -2,15 +2,19 @@ package com.kjh.unchained.domain;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Getter
 public class PostEditor {
     private String title;
     private String content;
+    private LocalDateTime updatedTime;
 
-
-    public PostEditor(String title, String content) {
+    public PostEditor(String title, String content,LocalDateTime updatedTime) {
         this.title = title;
         this.content = content;
+        this.updatedTime = updatedTime;
     }
 
     public static PostEditor.PostEditorBuilder builder() {
@@ -20,7 +24,7 @@ public class PostEditor {
     public static class PostEditorBuilder {
         private String title;
         private String content;
-
+        private LocalDateTime updatedTime = LocalDateTime.now();
         PostEditorBuilder() {
         }
 
@@ -37,13 +41,22 @@ public class PostEditor {
             }
             return this;
         }
-
-        public PostEditor build() {
-            return new PostEditor(this.title, this.content);
+        public PostEditorBuilder updatedTime(){
+            this.updatedTime = LocalDateTime.now();
+            return this;
         }
 
+        public PostEditor build() {
+            return new PostEditor(this.title, this.content,this.updatedTime);
+        }
+
+        @Override
         public String toString() {
-            return "PostEditor.PostEditorBuilder(title=" + this.title + ", content=" + this.content + ")";
+            return "PostEditorBuilder{" +
+                    "title='" + title + '\'' +
+                    ", content='" + content + '\'' +
+                    ", updatedTime=" + updatedTime +
+                    '}';
         }
     }
 

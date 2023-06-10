@@ -1,7 +1,7 @@
 import {ARTICLE_API_DOMAIN} from "../../util";
-import useArticleAsync from "./useArticleAsync";
+import useArticleAsync from "./hooks/usePostAsync";
 
-const useArticle = (page = 1, size = 10, deps = [],skip = false) => {
+const usePost = (page = 1, size = 10, deps = [], skip = false) => {
     async function getArticle(){
         return await fetch(`${ARTICLE_API_DOMAIN}/posts?page=${page}&size=${size}`)
             .then(res => {
@@ -19,4 +19,4 @@ const useArticle = (page = 1, size = 10, deps = [],skip = false) => {
     return [state, refetch];
 }
 
-export default useArticle;
+export default usePost;
