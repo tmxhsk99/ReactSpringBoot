@@ -1,12 +1,12 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
 import {SITE_NAME, DEFAULT_MENU,POST_API_DOMAIN} from "../../util";
-import PostHeader from "front/src/component/post/PostHeader";
-import usePost from "../../component/hooks/usePost";
+import PostHeader from "../../component/post/PostHeader";
+import useGetPost from "../../component/hooks/post/useGetPost";
 import {useEffect} from "react";
 
 const Post = () => {
-    const [state, refetch] = usePost(1, 10);
+    const [state, refetch] = useGetPost(1, 10);
     const {loading, data, error} = state;
     console.log("loading : " + loading);
     console.log("data : " + data);
