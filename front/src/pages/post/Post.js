@@ -1,6 +1,6 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
-import {SITE_NAME, DEFAULT_MENU,ARTICLE_API_DOMAIN} from "../../util";
+import {SITE_NAME, DEFAULT_MENU,POST_API_DOMAIN} from "../../util";
 import PostHeader from "front/src/component/post/PostHeader";
 import usePost from "../../component/hooks/usePost";
 import {useEffect} from "react";
