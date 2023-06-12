@@ -23,6 +23,7 @@ const Post = () => {
                     <PostHeader
                         title={"전체 글"}
                     />
+
                 </div>
             </div>
             <Footer

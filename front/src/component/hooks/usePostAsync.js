@@ -25,7 +25,7 @@ function reducer(state, action) {
     }
 }
 
-function useAtricleAsync(callback, deps = [], skip = false) {
+function usePostAsync(callback, deps = [], skip = false) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: null,
@@ -50,4 +50,4 @@ function useAtricleAsync(callback, deps = [], skip = false) {
     return [state, fetchData];
 }
 
-export default useAtricleAsync;
+export default usePostAsync;
