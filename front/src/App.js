@@ -2,10 +2,10 @@ import './App.css';
 import {Route, Routes} from "react-router-dom";
 import React from "react";
 import Home from "./pages/Home"
-import Post from "./pages/article/Post"
-import PostAdd from "./pages/article/PostAdd"
-import PostEdit from "./pages/article/PostEdit"
-import PostDetail from "./pages/article/PostDetail"
+import Post from "./pages/post/Post"
+import PostAdd from "./pages/post/PostAdd"
+import PostEdit from "./pages/post/PostEdit"
+import PostDetail from "./pages/post/PostDetail"
 function App() {
   return (
     <div className="App">
