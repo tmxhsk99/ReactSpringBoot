@@ -1,7 +1,7 @@
-const PostAdd = () =>{
+const PostAddPage = () =>{
     return (
         <div>ArticleAdd 페이지</div>
     )
 }
 
-export default PostAdd;
+export default PostAddPage;

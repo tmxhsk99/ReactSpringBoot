@@ -1,42 +1,19 @@
-import Header from "../../component/common/Header";
-import Footer from "../../component/common/Footer";
-import {SITE_NAME, DEFAULT_MENU, POST_API_DOMAIN} from "../../util";
-import PostList from "../../component/post/PostList";
-import useGetPost from "../../component/hooks/post/useGetPost";
-import Loading from "../../component/common/Loading";
+import {Route, Routes} from "react-router-dom";
+import PostListPage from "./PostListPage";
+import PostEditPage from "./PostEditPage";
+import PostAddPage from "./PostAddPage";
+import PostDetailPage from "./PostDetailPage";
+
 
 const Post = () => {
-    const [state, refetch] = useGetPost(1, 10);
-    const {loading, data, error} = state;
-    if (loading) {
-        return (
-            <>
-                <Header
-                    title={SITE_NAME}
-                    menus={DEFAULT_MENU}/>
-                <Loading/>
-                <Footer
-                    title={SITE_NAME}
-                    menus={DEFAULT_MENU}
-                />
-            </>
-        )
-    } else {
-        return (
-            <>
-                <Header
-                    title={SITE_NAME}
-                    menus={DEFAULT_MENU}/>
-                <PostList posts={data}/>
-                <Footer
-                    title={SITE_NAME}
-                    menus={DEFAULT_MENU}
-                />
-            </>
-
-        )
-    }
-
+    return (
+        <Routes>
+            <Route path="/list" element={<PostListPage/>}/>
+            <Route path="/edit/:id" element={<PostEditPage/>}/>
+            <Route path="/add" element={<PostAddPage/>}/>
+            <Route path="/detail/:id" element={<PostDetailPage/>}/>
+        </Routes>
+    )
 }
 
 export default Post;

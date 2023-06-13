@@ -4,9 +4,13 @@ import PostHeader from "./PostHeader";
 import PostItem from "./PostItem";
 import React, {useEffect, useState} from "react";
 import EmptyItem from "../common/EmptyItem";
+import Pagination from "./Pagination";
 
+const sortOptionList = [
+    {value: "latest", name: "최신순"},
+    {value: "oldest", name: "오래된 순"},
+]
 const PostList = ({posts}) => {
-    console.log(posts)
 
     const [sortType, setSortType] = useState("latest");
     const [sortedData, setSortedData] = useState([]);
@@ -43,14 +47,15 @@ const PostList = ({posts}) => {
         return (
             <div className="PostList">
                 <Aside/>
-                <div className="list nes-container">
+                <section className="list nes-container">
                     <PostHeader title={"글 리스트"}/>
                     <div className="boardList">
                         {posts.map((it) =>
                             <PostItem key={it.id} {...it}/>
                         )}
                     </div>
-                </div>
+                    <Pagination></Pagination>
+                </section>
                 <Aside/>
             </div>
         );
