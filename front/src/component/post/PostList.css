@@ -1,0 +1,18 @@
+.PostList{
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.PostList .list{
+    min-width: 950px;
+    width: 1200px;
+}
+
+.PostList a {
+    color: #222;
+    text-decoration: none;
+}
