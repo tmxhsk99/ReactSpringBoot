@@ -1,38 +1,42 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
-import {SITE_NAME, DEFAULT_MENU,POST_API_DOMAIN} from "../../util";
-import PostHeader from "../../component/post/PostHeader";
+import {SITE_NAME, DEFAULT_MENU, POST_API_DOMAIN} from "../../util";
+import PostList from "../../component/post/PostList";
 import useGetPost from "../../component/hooks/post/useGetPost";
-import {useEffect} from "react";
+import Loading from "../../component/common/Loading";
 
 const Post = () => {
     const [state, refetch] = useGetPost(1, 10);
     const {loading, data, error} = state;
-    console.log("loading : " + loading);
-    console.log("data : " + data);
-    console.dir(data);
-    console.log("error :" + error);
+    if (loading) {
+        return (
+            <>
+                <Header
+                    title={SITE_NAME}
+                    menus={DEFAULT_MENU}/>
+                <Loading/>
+                <Footer
+                    title={SITE_NAME}
+                    menus={DEFAULT_MENU}
+                />
+            </>
+        )
+    } else {
+        return (
+            <>
+                <Header
+                    title={SITE_NAME}
+                    menus={DEFAULT_MENU}/>
+                <PostList posts={data}/>
+                <Footer
+                    title={SITE_NAME}
+                    menus={DEFAULT_MENU}
+                />
+            </>
 
-    return (
-        <>
-            <Header
-                title={SITE_NAME}
-                menus={DEFAULT_MENU}/>
-            <div className="inner">
-                <div className="nes-container is-dark with-title">
-                    <PostHeader
-                        title={"전체 글"}
-                    />
+        )
+    }
 
-                </div>
-            </div>
-            <Footer
-                title={SITE_NAME}
-                menus={DEFAULT_MENU}
-            />
-        </>
-
-    )
 }
 
 export default Post;
