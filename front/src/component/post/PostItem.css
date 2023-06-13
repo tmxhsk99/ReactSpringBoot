@@ -1,0 +1,71 @@
+.PostItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+}
+
+.PostItem:hover {
+    background-color: #eeeeee;
+}
+
+.PostItem .image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    margin-right: 10px;
+    color: rgb(0 0 0 / 40%);
+    font-size: 3em;
+}
+
+.PostItem .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: center;
+    width: 80%;
+}
+
+.PostItem .info .titleContainer {
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    overflow: hidden;
+}
+
+.PostItem .info .titleContainer .title {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.PostItem .info .titleContainer .title .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.PostItem .etc {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 2px 0;
+    font-size: .8em;
+    color: rgb(0 0 0 / 40%);
+    white-space: nowrap;
+}
+
+.PostItem .dot{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 100%;
+
+}
+
