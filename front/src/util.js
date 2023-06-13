@@ -24,12 +24,12 @@ export const DEFAULT_MENU = [
     },
     {
         id: 1,
-        url: "/article/list",
+        url: "/post/list",
         text: "글 리스트"
     },
     {
         id: 2,
-        url: "/article/add",
+        url: "/post/add",
         text: "새글 쓰기 "
     }
 ]
