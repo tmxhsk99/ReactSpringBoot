@@ -1,18 +1,18 @@
-import cardImg0 from "./assets/img/home/pika.png"
-import cardImg1 from "./assets/img/home/ishgg.png"
-import cardImg2 from "./assets/img/home/rizamong.png"
-import cardImg3 from "./assets/img/home/gbw.png"
-import title0 from "./assets/img/home/title0.png"
-import title1 from "./assets/img/home/title1.png"
-import title2 from "./assets/img/home/title2.png"
-import title3 from "./assets/img/home/title3.png"
-import interface0 from "./assets/img/home/interface0.png"
-import interface1 from "./assets/img/home/interface1.png"
-import interface2 from "./assets/img/home/interface2.png"
-import interface3 from "./assets/img/home/interface3.png"
-import person0 from "./assets/img/home/taziri.png";
-import person1 from "./assets/img/home/masda.png";
-import person2 from "./assets/img/home/oomori.png";
+import cardImg0 from "../assets/img/home/pika.png"
+import cardImg1 from "../assets/img/home/ishgg.png"
+import cardImg2 from "../assets/img/home/rizamong.png"
+import cardImg3 from "../assets/img/home/gbw.png"
+import title0 from "../assets/img/home/title0.png"
+import title1 from "../assets/img/home/title1.png"
+import title2 from "../assets/img/home/title2.png"
+import title3 from "../assets/img/home/title3.png"
+import interface0 from "../assets/img/home/interface0.png"
+import interface1 from "../assets/img/home/interface1.png"
+import interface2 from "../assets/img/home/interface2.png"
+import interface3 from "../assets/img/home/interface3.png"
+import person0 from "../assets/img/home/taziri.png";
+import person1 from "../assets/img/home/masda.png";
+import person2 from "../assets/img/home/oomori.png";
 
 export const POST_API_DOMAIN = "http://localhost:8080";
 export const SITE_NAME = "레트로그";
@@ -195,3 +195,4 @@ export const personList = [
     }
 
 ];
+

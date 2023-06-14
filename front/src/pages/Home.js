@@ -2,7 +2,7 @@ import Header from "../component/common/Header";
 import Visual from "../component/home/Visual";
 import ImageShowcase from "../component/home/ImageShowcase";
 import ImageTextCard from "../component/home/ImageTextCard";
-import {SITE_NAME, cardImgList, titleImgList, interfaceList, personList, DEFAULT_MENU} from "../util";
+import {SITE_NAME, cardImgList, titleImgList, interfaceList, personList, DEFAULT_MENU} from "../util/util";
 import ImageShowcaseDetail from "../component/home/ImageShowcaseDetail";
 import ImageTextCardReverse from "../component/home/ImageTextCardReverse";
 import ImageShowcaseCircle from "../component/home/ImageShowcaseCircle";
