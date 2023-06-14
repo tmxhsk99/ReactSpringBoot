@@ -2,37 +2,15 @@ import "./PostList.css";
 import Aside from "../common/Aside";
 import PostHeader from "./PostHeader";
 import PostItem from "./PostItem";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import EmptyItem from "../common/EmptyItem";
 import Pagination from "./Pagination";
+import {PostStateContext} from "../../pages/post/Post";
+const PostList = () => {
 
-const sortOptionList = [
-    {value: "latest", name: "최신순"},
-    {value: "oldest", name: "오래된 순"},
-]
-const PostList = ({posts}) => {
+    const posts = useContext(PostStateContext);
 
-    const [sortType, setSortType] = useState("latest");
-    const [sortedData, setSortedData] = useState([]);
-    useEffect(() => {
-        if (posts != null) {
-            const compare = (a, b) => {
-                if (sortType === "latest") {
-                    return Number(b.createdTime) - Number(a.createdTime);
-                } else {
-                    return Number(a.createdTime) - Number(b.createdTime);
-                }
-            }
-            const copyList = posts;
-            copyList.sort(compare);
-            setSortedData(copyList);
-        }
-    }, [posts, sortType]);
-    const onChangeSortType = (e) => {
-        setSortType(e.target.value);
-    }
-
-    if (posts === null || posts === undefined) {
+    if (posts === null || posts === undefined || posts.length === 0) {
         return (
             <div className="PostList">
                 <Aside/>

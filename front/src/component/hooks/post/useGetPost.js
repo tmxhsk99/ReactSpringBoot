@@ -1,20 +1,24 @@
-import {POST_API_DOMAIN} from "../../../util";
+import {POST_API_DOMAIN} from "../../../util/util";
 import usePostAsync from "./usePostAsync";
+import {useCallback} from "react";
 
-const useGetPost = (page = 1, size = 10, deps = [], skip = false) => {
-    async function getPost(){
+function useGetPost(page = 1, size = 10, deps = [], skip = false) {
+    const getPost = useCallback(async () => {
         const resPostData = await fetch(`${POST_API_DOMAIN}/posts?page=${page}&size=${size}`)
             .then(res => {
-                if(!res.ok){
+                if (!res.ok) {
                     throw new Error(`errorCode : ${res.status} \nerrorMsg : ${res.json()}`);
                 }
                 return res.json();
             })
-            .catch(error => console.log(error.message));
+            .catch((e) => {
+                console.error(e);
+                return null;
+            });
         console.log(resPostData);
         return resPostData;
-    }
-    return usePostAsync(getPost, [], skip)
+    })
+    return usePostAsync(getPost, deps, skip);
 }
 
 export default useGetPost;
