@@ -6,7 +6,7 @@ import PostDetailPage from "./PostDetailPage";
 import {handleOnPageChange, handleOnClickPrev, handleOnClickNext} from "./PostEventHandlers";
 import {useRecoilState} from "recoil";
 import {pageInfoState} from "../../state/post/pageInfoState";
-
+import React from "react";
 export const PostDispatchContext = React.createContext();
 
 const Post = () => {
