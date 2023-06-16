@@ -7,6 +7,7 @@ import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.request.PostCreate;
 import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional //Transactional이 있어야 업데이트가 된다...
-    public PostResponse edit(Long id , PostEdit postEditDto){
+    public PostResponse edit(Long id, PostEdit postEditDto) {
 
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFound());
@@ -45,7 +46,7 @@ public class PostService {
         return new PostResponse(post);
     }
 
-    public Long write(PostCreate postCreateDto){
+    public Long write(PostCreate postCreateDto) {
         // postCreate -> Entity
         Post post = Post.builder()
                 .title(postCreateDto.getTitle())
@@ -57,7 +58,7 @@ public class PostService {
 
     public PostResponse get(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() ->  new PostNotFound());
+                .orElseThrow(() -> new PostNotFound());
 
         PostResponse response = new PostResponse(post);
         /**
@@ -73,10 +74,19 @@ public class PostService {
     // 글이 -> 1억개 -> DB가 뻗음
     // DB -> 애플리케이션 서버를 전달하는 시간  , 트래픽 비용등이 많이 발생할 수 있다.
     // 그러므로 전체 페이지에서 해당 원하는 페이지 값 리턴하도록 변경
-    public List<PostResponse> getList(PostSearch postSearch) {
-        return postRepository.getList(postSearch).stream()
+    public PostListResponse getList(PostSearch postSearch) {
+
+        List<PostResponse> postResponseList = postRepository.getList(postSearch).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
+
+        long PosttotalCount = postRepository.count();
+
+
+        return PostListResponse.builder()
+                .postResponseList(postResponseList)
+                .totalCount(PosttotalCount)
+                .build();
     }
 
     public void delete(Long id) {

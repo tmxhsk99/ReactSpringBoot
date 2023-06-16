@@ -3,6 +3,7 @@ package com.kjh.unchained.controller;
 import com.kjh.unchained.request.PostCreate;
 import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import com.kjh.unchained.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +40,9 @@ public class PostController {
      * @return
      */
     @GetMapping("/posts")
-    public List<PostResponse> getList(@ModelAttribute @Valid PostSearch postSearch) {
+    public PostListResponse getList(@ModelAttribute PostSearch postSearch) {
         log.info("[PostController:/post]"+ postSearch.toString());
-        List<PostResponse> result = postService.getList(postSearch);
+        PostListResponse result = postService.getList(postSearch);
         log.info("[PostController:result]"+ result.toString());
         return result;
     }
