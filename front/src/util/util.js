@@ -16,6 +16,9 @@ import person2 from "../assets/img/home/oomori.png";
 
 export const POST_API_DOMAIN = "http://localhost:8080";
 export const SITE_NAME = "레트로그";
+export const PAGE_GROUP_SIZE = 5;
+export const DEFAULT_PAGE_COUNT = 10;
+
 export const DEFAULT_MENU = [
     {
         id: 0,
