@@ -1,46 +1,65 @@
-import useGetPost from "../../component/hooks/post/useGetPost";
-const PAGE_GROUP_SIZE = 5;
-export const handleOnPageChange = (dispatch) => {
+import {PAGE_GROUP_SIZE} from "../../util/util";
+
+
+/**
+ * 페이지 클릭시
+ * @param getPost
+ * @param dispatch
+ * @returns {(function(*, *, *): (boolean|undefined))|*}
+ */
+export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
+
     return (pageNum, pageCountSize, isSelected) => {
+
         if (isSelected) {
             return false;
         }
-        const movedPages = useGetPost(pageNum, pageCountSize);
-        dispatch(
-            {
-                "type": "PAGE_MOVE",
-                "data": movedPages,
-            }
-        )
+        setPageInfo({
+            ...pageInfo,
+            currentPage: pageNum,
+            pageCountSize: pageCountSize,
+        });
+        navigate("/post/list");
     }
 };
+/**
+ * 다음 버튼 클릭 시 이벤트
+ * @param getPost
+ * @param dispatch
+ * @returns {(function(*, *): Promise<void>)|*}
+ */
+export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
 
-export const handleOnClickPrev = (dispatch) => {
     return (currentPage, pageCountSize) => {
         let prevGroupLastPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE;
         if (prevGroupLastPage <= 0) {
             prevGroupLastPage = 1;
         }
-        const prevPages = useGetPost(prevGroupLastPage, pageCountSize);
-        dispatch(
-            {
-                "type": "PAGE_PREV",
-                "data": prevPages,
-            }
-        )
-    }
+        setPageInfo({
+            ...pageInfo,
+            currentPage: prevGroupLastPage,
+            pageCountSize: pageCountSize,
+        });
+        navigate("/post/list")
+    };
 }
+/**
+ * 이전 버튼 클릭시 이벤트
+ * @param getPost
+ * @param dispatch
+ * @returns {(function(*, *): Promise<void>)|*}
+ */
+export const handleOnClickNext = (navigate, pageInfo, setPageInfo) => {
 
-export const handleOnClickNext = (dispatch) => {
     return (currentPage, pageCountSize) => {
         let nextGroupFirstPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE + 1) * PAGE_GROUP_SIZE + 1;
-        const nextPages = useGetPost(nextGroupFirstPage, pageCountSize);
-        dispatch(
-            {
-                "type": "PAGE_NEXT",
-                "data": nextPages,
-            }
-        )
+
+        setPageInfo({
+            ...pageInfo,
+            currentPage: nextGroupFirstPage,
+            pageCountSize: pageCountSize,
+        });
+        navigate("/post/list");
     }
 }
 
