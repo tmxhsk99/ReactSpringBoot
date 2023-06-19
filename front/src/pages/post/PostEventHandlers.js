@@ -19,6 +19,12 @@ export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
             currentPage: pageNum,
             pageCountSize: pageCountSize,
         });
+        localStorage.setItem(pageInfo,{
+                    ...pageInfo,
+                    currentPage: pageNum,
+                    pageCountSize: pageCountSize,
+                })
+
         navigate("/post/list");
     }
 };
