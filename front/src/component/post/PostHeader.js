@@ -2,8 +2,8 @@ import "./PostHeader.css";
 
 const PostHeader = ({title}) => {
     return(
-        <section className="ArticleHeader">
-            <h3>{title}</h3>
+        <section className="PostHeader">
+            <h4>{title}</h4>
         </section>
     )
 }
