@@ -59,7 +59,6 @@ export const fetcher = async ({method, path, body, params}) => {
             console.error(e);
             return null;
         });
-    console.log(resPostData);
     return resPostData;
 }
 
