@@ -1,0 +1,52 @@
+.WriterInfoContainer {
+    padding: 5px 0;
+    color: rgb(0 0 0 / 40%);
+}
+
+.WriterInfoContainer .WriterInfo {
+    display: flex;
+    font-size: 2em;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.WriterInfoContainer .WriterInfo .userImage {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+    background-color: #fff;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.WriterInfoContainer .WriterInfo .nickName {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.WriterInfoContainer .WriterInfo .likeCount {
+    color: black;
+}
+
+
+.dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 100%;
+}
+
+.WriterInfoContainer svg,i{
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+}
+.WriterInfoContainer .WriterAuth {
+    position: relative;
+}

@@ -1,0 +1,21 @@
+.PostDetail{
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.PostDetail .detail{
+    min-width: 950px;
+    width: 1200px;
+}
+
+.PostDetail .content {
+    font-size: 3em;
+    min-height: 25vh;
+}
+.PostDetail .PostHeader{
+    margin-top: 5vh;
+}

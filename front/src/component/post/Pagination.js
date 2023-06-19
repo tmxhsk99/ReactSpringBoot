@@ -1,18 +1,28 @@
 import "./Pagination.css";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {PostDispatchContext} from "../../pages/post/Post";
 import {PAGE_GROUP_SIZE} from "../../util/util";
 import {useRecoilState} from "recoil";
 import {pageInfoState} from "../../state/post/pageInfoState";
 
 const Pagination = () => {
-    const [usePageInfoState, setUsePageInfoState] = useRecoilState(pageInfoState);
-    const {currentPage, pageCountSize, totalCount} = usePageInfoState;
+    const [pageInfo, setPageInfo] = useRecoilState(pageInfoState);
+    const {currentPage, pageCountSize, totalCount} = pageInfo;
     const {onPageChange, onClickPrev, onClickNext} = useContext(PostDispatchContext);
     const groupStartPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE + 1;
     const totalPage = (totalCount / pageCountSize) + (totalCount % pageCountSize != 0 ? 1 : 0);
     const pageNumbers = [];
     const groupLastPage = groupStartPage + (PAGE_GROUP_SIZE - 1) >= totalPage ? totalPage : groupStartPage + (PAGE_GROUP_SIZE - 1);
+
+    useEffect(() => {
+        const rawPaginationInfoData = localStorage.getItem("pageInfo");
+        if(rawPaginationInfoData != null){
+            const paginationInfoData = JSON.parse(rawPaginationInfoData);
+            setPageInfo({
+                ...paginationInfoData
+            })
+        }
+    },[]);
 
     for (let i = groupStartPage; i <= groupLastPage; i++) {
         let isSelected = i === currentPage ? true : false;
