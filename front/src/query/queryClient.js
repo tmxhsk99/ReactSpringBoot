@@ -16,7 +16,7 @@ export const getQueryClient = (() => {
                     queries: {
                         cacheTime: 1000 * 60 * 60 * 6,
                         staleTime: 1000 * 60 * 60,
-                        refetchOnMount:false,
+                        refetchOnMount: false,
                         refetchOnReconnect: false,
                         refetchOnWindowFocus: false,
                     }
@@ -29,7 +29,7 @@ export const getQueryClient = (() => {
 
 export const fetcher = async ({method, path, body, params}) => {
     //posts?page=${page}&size=${size}
-    let url = `${POST_API_DOMAIN}${path}`;
+    let url = `${POST_API_DOMAIN}`;
     let RequestInit;
     const fetchOptions = RequestInit = {
         method,
@@ -38,7 +38,9 @@ export const fetcher = async ({method, path, body, params}) => {
             'Access-Control-Allow-Origin': POST_API_DOMAIN,
         }
     }
-
+    if (path) {
+        url += path;
+    }
     if (params) {
         const searchParams = new URLSearchParams(params);
         url += '?' + searchParams.toString();
