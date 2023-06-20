@@ -7,23 +7,33 @@ import {PAGE_GROUP_SIZE} from "../../util/util";
  * @param dispatch
  * @returns {(function(*, *, *): (boolean|undefined))|*}
  */
-export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
+export const handleOnPageChange = (navigate, posts, setPosts) => {
 
-    return async (pageNum, pageCountSize, isSelected) => {
+    return async (pageNum, pageSize, isSelected) => {
 
         if (isSelected) {
             return false;
         }
-        setPageInfo({
-            ...pageInfo,
-            currentPage: pageNum,
-            pageCountSize: pageCountSize,
+        await setPosts({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: pageNum,
+                pageSize: pageSize,
+            }
         });
-        await localStorage.setItem(pageInfo, {
-            ...pageInfo,
-            currentPage: pageNum,
-            pageCountSize: pageCountSize,
-        })
+        await localStorage.setItem("posts", JSON.stringify({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: pageNum,
+                pageSize: pageSize,
+            }
+        }))
 
         navigate("/post/list");
     }
@@ -34,23 +44,34 @@ export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
  * @param dispatch
  * @returns {(function(*, *): Promise<void>)|*}
  */
-export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
+export const handleOnClickPrev = (navigate, posts, setPosts) => {
 
-    return async (currentPage, pageCountSize) => {
+    return async (currentPage, pageSize) => {
         let prevGroupLastPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE;
         if (prevGroupLastPage <= 0) {
             prevGroupLastPage = 1;
         }
-        setPageInfo({
-            ...pageInfo,
-            currentPage: prevGroupLastPage,
-            pageCountSize: pageCountSize,
+
+        await setPosts({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: prevGroupLastPage,
+                pageSize: pageSize,
+            }
         });
-        await localStorage.setItem(pageInfo, {
-            ...pageInfo,
-            currentPage: prevGroupLastPage,
-            pageCountSize: pageCountSize,
-        })
+        await localStorage.setItem("posts", JSON.stringify({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: prevGroupLastPage,
+                pageSize: pageSize,
+            }
+        }))
 
         navigate("/post/list")
     };
@@ -61,21 +82,31 @@ export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
  * @param dispatch
  * @returns {(function(*, *): Promise<void>)|*}
  */
-export const handleOnClickNext = (navigate, pageInfo, setPageInfo) => {
+export const handleOnClickNext = (navigate, posts, setPosts) => {
 
-    return async (currentPage, pageCountSize) => {
+    return async (currentPage, pageSize) => {
         let nextGroupFirstPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE + 1) * PAGE_GROUP_SIZE + 1;
 
-        setPageInfo({
-            ...pageInfo,
-            currentPage: nextGroupFirstPage,
-            pageCountSize: pageCountSize,
+        await setPosts({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: nextGroupFirstPage,
+                pageSize: pageSize,
+            }
         });
-        await localStorage.setItem(pageInfo, {
-            ...pageInfo,
-            currentPage: nextGroupFirstPage,
-            pageCountSize: pageCountSize,
-        })
+        await localStorage.setItem("posts", JSON.stringify({
+            postList:[
+                ...posts.postList,
+            ],
+            pageInfo: {
+                ...posts.pageInfo,
+                currentPage: nextGroupFirstPage,
+                pageSize: pageSize,
+            }
+        }))
         navigate("/post/list");
     }
 }

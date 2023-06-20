@@ -5,16 +5,17 @@ import PostAddPage from "./PostAddPage";
 import PostDetailPage from "./PostDetailPage";
 import {handleOnPageChange, handleOnClickPrev, handleOnClickNext} from "./PostEventHandlers";
 import {useRecoilState} from "recoil";
-import {pageInfoState} from "../../state/post/pageInfoState";
 import React from "react";
+import {postsState} from "../../state/post/postsState";
+
 export const PostDispatchContext = React.createContext();
 
 const Post = () => {
-    const [usePageInfo,setUsePageInfo] = useRecoilState(pageInfoState);
+    const [posts, setPosts] = useRecoilState(postsState);
     const navigate = useNavigate();
-    const onPageChange = handleOnPageChange(navigate, usePageInfo, setUsePageInfo);
-    const onClickPrev = handleOnClickPrev(navigate, usePageInfo, setUsePageInfo);
-    const onClickNext = handleOnClickNext(navigate, usePageInfo, setUsePageInfo);
+    const onPageChange = handleOnPageChange(navigate, posts, setPosts);
+    const onClickPrev = handleOnClickPrev(navigate, posts, setPosts);
+    const onClickNext = handleOnClickNext(navigate, posts, setPosts);
 
     return (
         <PostDispatchContext.Provider value={{onPageChange, onClickPrev, onClickNext}}>

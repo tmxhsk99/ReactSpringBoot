@@ -80,12 +80,14 @@ public class PostService {
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
 
-        long PosttotalCount = postRepository.count();
+        long postTotalCount = postRepository.count();
 
 
         return PostListResponse.builder()
-                .postResponseList(postResponseList)
-                .totalCount(PosttotalCount)
+                .postList(postResponseList)
+                .totalCount(postTotalCount)
+                .currentPage(postSearch.getPage())
+                .pageSize(postSearch.getSize())
                 .build();
     }
 

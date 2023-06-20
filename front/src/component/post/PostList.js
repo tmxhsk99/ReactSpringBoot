@@ -2,38 +2,37 @@ import "./PostList.css";
 import Aside from "../common/Aside";
 import PostHeader from "./PostHeader";
 import PostItem from "./PostItem";
-import React, {useEffect} from "react";
-import EmptyItem from "../common/EmptyItem";
+import React, {useEffect, useState} from "react";
+import EmptyPostList from "../common/empty/EmptyPostList";
 import Pagination from "./Pagination";
 import {useQuery} from "react-query";
 import {postGetFetcher} from "../../query/post/postApiService";
 import {useRecoilState} from "recoil";
-import {pageInfoState} from "../../state/post/pageInfoState";
-import {postListState} from "../../state/post/postListState";
+import {postsState} from "../../state/post/postsState";
+
+async function updatePostLocalStorage(response) {
+    await localStorage.setItem("posts", JSON.stringify({
+        postList: [
+            ...response.data.postList,
+        ],
+        pageInfo: {
+            ...response.data.pageInfo,
+        }
+    }));
+}
 
 const PostList = () => {
-    const [usePageInfo, setUsePageInfo] = useRecoilState(pageInfoState);
-    const [postList, setPostList] = useRecoilState(postListState);
-
+    const [posts, setPosts] = useRecoilState(postsState);
     const response =
-        useQuery(['POSTS', {page: usePageInfo.currentPage, size: usePageInfo.pageCountSize}]
-            , () => postGetFetcher({page: usePageInfo.currentPage, size: usePageInfo.pageCountSize}));
+        useQuery(['POSTS', {page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize}]
+            , () => postGetFetcher({page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize}));
 
 
     useEffect(() => {
         if (response.isSuccess) {
-            if (usePageInfo.totalCount !== response.data.totalCount) {
-                setUsePageInfo(
-                    {
-                        ...usePageInfo,
-                        totalCount:
-                        response.data.totalCount
-                    }
-                )
-            }
-            // postList를 상태값에 저장한다.
-            setPostList(response.data.postList);
-            localStorage.setItem("postList", JSON.stringify(response.data.postList));
+            // posts 를 상태값 및 localStorage 에 저장한다.
+            setPosts(response.data);
+            void updatePostLocalStorage(response);
         }
 
     }, [response.isSuccess]);
@@ -49,7 +48,9 @@ const PostList = () => {
                             <PostItem key={it.id} {...it}/>
                         )}
                     </div>
-                    <Pagination/>
+                    <Pagination totalCount={response.data.pageInfo.totalCount}
+                                currentPage={response.data.pageInfo.currentPage}
+                                pageSize={response.data.pageInfo.pageSize}/>
                 </section>
                 <Aside/>
             </div>
@@ -58,9 +59,8 @@ const PostList = () => {
         return (
             <div className="PostList">
                 <Aside/>
-                <div className="list nes-container is-dark with-title">
-                    <PostHeader title={"글 리스트"}/>
-                    <EmptyItem/>
+                <div className="list nes-container ">
+                    <EmptyPostList title={"글 리스트"}/>
                 </div>
                 <Aside/>
             </div>

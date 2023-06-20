@@ -1,9 +1,10 @@
 package com.kjh.unchained.request;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 public class PostSearch {
     private static final int MAX_SIZE = 2000;
@@ -16,9 +17,4 @@ public class PostSearch {
         return (long)(Math.max(1,page) - 1) * Math.min(size,MAX_SIZE);
     }
 
-    /*@Builder
-    public PostSearch(Integer page, Integer size) {
-        this.page = page ;
-        this.size = size ;
-    }*/
 }
