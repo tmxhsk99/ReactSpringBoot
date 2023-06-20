@@ -9,7 +9,7 @@ import {PAGE_GROUP_SIZE} from "../../util/util";
  */
 export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
 
-    return (pageNum, pageCountSize, isSelected) => {
+    return async (pageNum, pageCountSize, isSelected) => {
 
         if (isSelected) {
             return false;
@@ -19,11 +19,11 @@ export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
             currentPage: pageNum,
             pageCountSize: pageCountSize,
         });
-        localStorage.setItem(pageInfo,{
-                    ...pageInfo,
-                    currentPage: pageNum,
-                    pageCountSize: pageCountSize,
-                })
+        await localStorage.setItem(pageInfo, {
+            ...pageInfo,
+            currentPage: pageNum,
+            pageCountSize: pageCountSize,
+        })
 
         navigate("/post/list");
     }
@@ -36,7 +36,7 @@ export const handleOnPageChange = (navigate, pageInfo, setPageInfo) => {
  */
 export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
 
-    return (currentPage, pageCountSize) => {
+    return async (currentPage, pageCountSize) => {
         let prevGroupLastPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE;
         if (prevGroupLastPage <= 0) {
             prevGroupLastPage = 1;
@@ -46,6 +46,12 @@ export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
             currentPage: prevGroupLastPage,
             pageCountSize: pageCountSize,
         });
+        await localStorage.setItem(pageInfo, {
+            ...pageInfo,
+            currentPage: prevGroupLastPage,
+            pageCountSize: pageCountSize,
+        })
+
         navigate("/post/list")
     };
 }
@@ -57,7 +63,7 @@ export const handleOnClickPrev = (navigate, pageInfo, setPageInfo) => {
  */
 export const handleOnClickNext = (navigate, pageInfo, setPageInfo) => {
 
-    return (currentPage, pageCountSize) => {
+    return async (currentPage, pageCountSize) => {
         let nextGroupFirstPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE + 1) * PAGE_GROUP_SIZE + 1;
 
         setPageInfo({
@@ -65,6 +71,11 @@ export const handleOnClickNext = (navigate, pageInfo, setPageInfo) => {
             currentPage: nextGroupFirstPage,
             pageCountSize: pageCountSize,
         });
+        await localStorage.setItem(pageInfo, {
+            ...pageInfo,
+            currentPage: nextGroupFirstPage,
+            pageCountSize: pageCountSize,
+        })
         navigate("/post/list");
     }
 }
