@@ -1,0 +1,33 @@
+.HorizonButtonList {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: .9em;
+    margin: 20px 20px;
+}
+
+.HorizonButtonList div {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
+
+.HorizonButtonList .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.HorizonButtonList .left {
+    justify-content: start
+}
+
+.HorizonButtonList .center {
+    justify-content: center;
+}
+
+.HorizonButtonList .right {
+    justify-content: right;
+}
+
