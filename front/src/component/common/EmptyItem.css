@@ -1,9 +1,0 @@
-.EmptyItem{
-    display: flex;
-    justify-content: center;
-    height: 600px;
-}
-.EmptyItem .guideBox table{
-    width: 500px;
-    height: 500px;
-}
