@@ -1,6 +1,5 @@
 import Header from "../../component/common/Header";
-import {DEFAULT_MENU, SITE_NAME} from "../../util/util";
-import PostList from "../../component/post/PostList";
+import {DEFAULT_MENU, SITE_NAME} from "../../util/constUtil";
 import Footer from "../../component/common/Footer";
 
 const PostEditPage = () => {

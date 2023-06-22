@@ -6,10 +6,22 @@ import {fetcher} from "../queryClient";
  * @param sizeParam
  * @returns {Promise<any>}
  */
-export const postGetFetcher = ({page = 1, size = 10}) => fetcher({
+export const postGetFetcher = ({
+                                   page = 1,
+                                   size = 10,
+                                   title = "",
+                                   content = "",
+                                   nikName = "",
+                               }) => fetcher({
     method: "GET",
     path: "/posts",
-    params: {page: page, size: size}
+    params: {
+        page: page,
+        size: size,
+        title: title,
+        content: content,
+        nikName: nikName,
+    },
 })
 
 export const postFindByIdFetcher = ({id}) => fetcher({

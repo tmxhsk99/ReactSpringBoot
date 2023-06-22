@@ -36,11 +36,6 @@ const PostDetail = ({postId}) => {
         if(findPost === 'loading' && response.isSuccess){
             setFindPost(response.data);
         }
-        console.log(response);
-        console.log(Number(postId) + 1 )
-        console.log(posts);
-        console.log(posts.pageInfo.totalCount);
-        console.log(Number(postId) + 1 > posts.pageInfo.totalCount)
     }, [postId, response.isSuccess]);
 
     if(findPost === 'loading'){

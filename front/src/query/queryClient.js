@@ -5,7 +5,7 @@ import {
     QueryClient,
     QueryClientProvider,
 } from 'react-query'
-import {POST_API_DOMAIN} from "../util/util";
+import {POST_API_DOMAIN} from "../util/constUtil";
 
 export const getQueryClient = (() => {
     let client = null;
@@ -45,7 +45,7 @@ export const fetcher = async ({method, path, body, params}) => {
         const searchParams = new URLSearchParams(params);
         url += '?' + searchParams.toString();
     }
-
+    console.log("params", params);
     if (body) {
         fetchOptions.body = JSON.stringify(body);
     }

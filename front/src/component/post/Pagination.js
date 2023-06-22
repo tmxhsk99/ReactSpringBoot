@@ -1,7 +1,7 @@
 import "./Pagination.css";
 import {useContext, useEffect} from "react";
 import {PostDispatchContext} from "../../pages/post/Post";
-import {PAGE_GROUP_SIZE} from "../../util/util";
+import {PAGE_GROUP_SIZE} from "../../util/constUtil";
 
 const Pagination = ({totalCount,currentPage,pageSize}) => {
     const {onPageChange, onClickPrev, onClickNext} = useContext(PostDispatchContext);

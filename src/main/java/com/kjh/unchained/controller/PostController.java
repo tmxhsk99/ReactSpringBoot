@@ -40,8 +40,8 @@ public class PostController {
      * @return
      */
     @GetMapping("/posts")
-    public PostListResponse getList(@ModelAttribute PostSearch postSearch) {
-        log.info("[PostController:/post]"+ postSearch.toString());
+    public PostListResponse getList(@ModelAttribute @Valid PostSearch postSearch) {
+        log.info("[PostController:/post]"+ postSearch.toString()+"\n");
         PostListResponse result = postService.getList(postSearch);
         log.info("[PostController:result]"+ result.toString());
         return result;

@@ -25,7 +25,7 @@ public class PostResponse {
 
     public PostResponse(Post post) {
         this.id = post.getId();
-        this.title = post.getTitle().substring(0,Math.min(post.getTitle().length(),10));
+        this.title = post.getTitle().substring(0,Math.min(post.getTitle().length(),50));
         this.content = post.getContent();
         this.createdTime = post.getCreatedTime().atZone(ZoneOffset.UTC).format(FormatUtil.UTC_DATE_TIME);
         this.updatedTime = post.getUpdatedTime().atZone(ZoneOffset.UTC).format(FormatUtil.UTC_DATE_TIME);

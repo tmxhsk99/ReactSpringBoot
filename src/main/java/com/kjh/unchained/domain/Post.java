@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "post")
 public class Post {
+    // todo 유저 엔티티 추가시 관련 속성 추가해야한다.author 엔티티 작성
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

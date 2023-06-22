@@ -3,7 +3,7 @@ import PostListPage from "./PostListPage";
 import PostEditPage from "./PostEditPage";
 import PostAddPage from "./PostAddPage";
 import PostDetailPage from "./PostDetailPage";
-import {handleOnPageChange, handleOnClickPrev, handleOnClickNext} from "./PostEventHandlers";
+import {handleOnPageChange, handleOnClickPrev, handleOnClickNext, handleOnClickSearch} from "./PostEventHandlers";
 import {useRecoilState} from "recoil";
 import React from "react";
 import {postsState} from "../../state/post/postsState";
@@ -16,9 +16,10 @@ const Post = () => {
     const onPageChange = handleOnPageChange(navigate, posts, setPosts);
     const onClickPrev = handleOnClickPrev(navigate, posts, setPosts);
     const onClickNext = handleOnClickNext(navigate, posts, setPosts);
+    const onClickPostSearch = handleOnClickSearch(navigate, posts, setPosts);
 
     return (
-        <PostDispatchContext.Provider value={{onPageChange, onClickPrev, onClickNext}}>
+        <PostDispatchContext.Provider value={{onPageChange, onClickPrev, onClickNext, onClickPostSearch}}>
             <Routes>
                 <Route path="/list" element={<PostListPage/>}/>
                 <Route path="/edit/:id" element={<PostEditPage/>}/>

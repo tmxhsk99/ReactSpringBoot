@@ -1,3 +1,5 @@
+import "./TitleContainer.css";
+
 const TitleContainer = ({title}) => {
     return (
         <div className="TitleContainer">

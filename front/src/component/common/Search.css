@@ -1,0 +1,39 @@
+.Search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 440px;
+    height: 40px;
+}
+
+.Search .search_wrap {
+    display: flex;
+    flex: 1;
+}
+
+.Search .type {
+    height: 40px;
+    width: auto;
+    padding: 0 10px;
+    font-size: 2em;
+    cursor: pointer;
+}
+.Search select {
+    border-image-repeat: stretch;
+}
+.Search .input_wrap{
+    height: 40px;
+    padding: 0 5px;
+    margin: 0 10px;
+    font-size: 2em;
+}
+.Search input {
+    border-image-repeat: stretch;
+
+}
+
+.Search .BasicNesBtn{
+    margin-top: 3px;
+    height: 100%;
+    font-size: 2em;
+}

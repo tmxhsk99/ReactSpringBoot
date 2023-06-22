@@ -19,6 +19,21 @@ export const SITE_NAME = "레트로그";
 export const PAGE_GROUP_SIZE = 5;
 export const DEFAULT_PAGE_COUNT = 10;
 
+export const DEFAULT_POST_SEARCH_TYPE = [
+    {
+        name: "제목",
+        value: ["title"],
+    },
+    {
+        name: "제목 + 내용",
+        value: ["title", "content"],
+    },
+    {
+        name: "글쓴이",
+        value: ["nickName"],
+    },
+]
+
 export const DEFAULT_MENU = [
     {
         id: 0,

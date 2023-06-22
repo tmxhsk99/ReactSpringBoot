@@ -2,13 +2,18 @@ import "./PostList.css";
 import Aside from "../common/Aside";
 import PostHeader from "./PostHeader";
 import PostItem from "./PostItem";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import EmptyPostList from "../common/empty/EmptyPostList";
 import Pagination from "./Pagination";
 import {useQuery} from "react-query";
 import {postGetFetcher} from "../../query/post/postApiService";
 import {useRecoilState} from "recoil";
 import {postsState} from "../../state/post/postsState";
+import SearchAndWrite from "../common/SearchAndWrite";
+import Search from "../common/Search";
+import {DEFAULT_POST_SEARCH_TYPE} from "../../util/constUtil";
+import {QueryKeys} from "../../query/queryClient";
+import {PostDispatchContext} from "../../pages/post/Post";
 
 async function updatePostLocalStorage(response) {
     await localStorage.setItem("posts", JSON.stringify({
@@ -17,26 +22,44 @@ async function updatePostLocalStorage(response) {
         ],
         pageInfo: {
             ...response.data.pageInfo,
+        },
+        searchCondition: {
+            ...response.data.searchCondition,
         }
     }));
 }
 
 const PostList = () => {
     const [posts, setPosts] = useRecoilState(postsState);
+    console.log("posts",posts);
+    //todo 상태값과 loacalStorage 를 어떻게 사용할지 고민하기
     const response =
-        useQuery(['POSTS', {page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize}]
-            , () => postGetFetcher({page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize})
-            , {/*캐시 설정 60초 이내에 다시 요청하면 캐시를 사용한다.*/
-                cacheTime: 1000 * 60,
-                staleTime: 1000 * 60,
+        useQuery([QueryKeys.POSTS,
+                {
+                    page: posts.pageInfo.currentPage,
+                    size: posts.pageInfo.pageSize,
+                    title: posts.searchCondition.title,
+                    content: posts.searchCondition.content,
+                    nickName: posts.searchCondition.nickName
+                }
+            ]
+            , () => postGetFetcher(
+                {
+                    page: posts.pageInfo.currentPage,
+                    size: posts.pageInfo.pageSize,
+                    title: posts.searchCondition.title,
+                    content: posts.searchCondition.content,
+                    nickName: posts.searchCondition.nickName
+                })
+            , {
+                cacheTime: 0,
+                staleTime: 0,
             }
         );
 
-
+    const {onClickPostSearch} = useContext(PostDispatchContext);
     useEffect(() => {
         if (response.isSuccess) {
-            // posts 를 상태값 및 localStorage 에 저장한다.
-            setPosts(response.data);
             void updatePostLocalStorage(response);
         }
 
@@ -56,6 +79,15 @@ const PostList = () => {
                     <Pagination totalCount={response.data.pageInfo.totalCount}
                                 currentPage={response.data.pageInfo.currentPage}
                                 pageSize={response.data.pageInfo.pageSize}/>
+                    <SearchAndWrite
+                        centerChildren={
+                            <Search
+                                searchType={DEFAULT_POST_SEARCH_TYPE}
+                                searchEvent={onClickPostSearch}
+                                navigate={"/post/list"}
+                            />
+                        }
+                    />
                 </section>
                 <Aside/>
             </div>

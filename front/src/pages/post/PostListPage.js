@@ -1,6 +1,6 @@
 import Header from "../../component/common/Header";
 import Footer from "../../component/common/Footer";
-import {SITE_NAME, DEFAULT_MENU} from "../../util/util";
+import {SITE_NAME, DEFAULT_MENU} from "../../util/constUtil";
 import PostList from "../../component/post/PostList";
 
 const PostListPage = () => {
