@@ -1,4 +1,4 @@
-package com.kjh.unchained.dto;
+package com.kjh.unchained.vo;
 
 import lombok.Builder;
 import lombok.Getter;

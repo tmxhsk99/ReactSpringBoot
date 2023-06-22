@@ -1,7 +1,7 @@
 package com.kjh.unchained.response;
 
 
-import com.kjh.unchained.dto.PageInfo;
+import com.kjh.unchained.vo.PageInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
