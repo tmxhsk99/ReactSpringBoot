@@ -25,7 +25,12 @@ const PostList = () => {
     const [posts, setPosts] = useRecoilState(postsState);
     const response =
         useQuery(['POSTS', {page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize}]
-            , () => postGetFetcher({page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize}));
+            , () => postGetFetcher({page: posts.pageInfo.currentPage, size: posts.pageInfo.pageSize})
+            , {/*캐시 설정 60초 이내에 다시 요청하면 캐시를 사용한다.*/
+                cacheTime: 1000 * 60,
+                staleTime: 1000 * 60,
+            }
+        );
 
 
     useEffect(() => {
