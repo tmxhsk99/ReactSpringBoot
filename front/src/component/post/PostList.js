@@ -15,7 +15,8 @@ import {DEFAULT_POST_SEARCH_TYPE} from "../../util/constUtil";
 import {QueryKeys} from "../../query/queryClient";
 import {PostDispatchContext} from "../../pages/post/Post";
 
-async function updatePostLocalStorage(response) {
+async function updatePostLocalStorage(response, posts) {
+
     await localStorage.setItem("posts", JSON.stringify({
         postList: [
             ...response.data.postList,
@@ -24,15 +25,14 @@ async function updatePostLocalStorage(response) {
             ...response.data.pageInfo,
         },
         searchCondition: {
-            ...response.data.searchCondition,
+            ...posts.searchCondition,
         }
     }));
 }
 
 const PostList = () => {
     const [posts, setPosts] = useRecoilState(postsState);
-    console.log("posts",posts);
-    //todo 상태값과 loacalStorage 를 어떻게 사용할지 고민하기
+    //todo 상태값과 localStorage 를 어떻게 사용할지 고민하기
     const response =
         useQuery([QueryKeys.POSTS,
                 {
@@ -58,12 +58,17 @@ const PostList = () => {
         );
 
     const {onClickPostSearch} = useContext(PostDispatchContext);
+
     useEffect(() => {
         if (response.isSuccess) {
-            void updatePostLocalStorage(response);
+            void updatePostLocalStorage(response, posts);
         }
 
     }, [response.isSuccess]);
+    useEffect(() => {
+        void response.refetch();
+    }, [posts]);
+
 
     if (response.isSuccess) {
         return (
