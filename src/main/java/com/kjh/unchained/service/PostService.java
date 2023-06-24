@@ -70,24 +70,23 @@ public class PostService {
         return response;
     }
 
-    // 글이 너무 많은 경우 -> 비용이 많이든다.
-    // 글이 -> 1억개 -> DB가 뻗음
-    // DB -> 애플리케이션 서버를 전달하는 시간  , 트래픽 비용등이 많이 발생할 수 있다.
-    // 그러므로 전체 페이지에서 해당 원하는 페이지 값 리턴하도록 변경
+
     public PostListResponse getList(PostSearch postSearch) {
 
+        log.info("[PostService:postSearch]"+ postSearch.toString());
         List<PostResponse> postResponseList = postRepository.getList(postSearch).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
 
-        long postTotalCount = postRepository.count();
-
+        long postTotalCount = postRepository.getListCount(postSearch).longValue();
+        log.info("[PostService:postResponseList]"+ postResponseList.toString());
+        log.info("[PostService:getListCount]" + postTotalCount);
 
         return PostListResponse.builder()
                 .postList(postResponseList)
-                .totalCount(postTotalCount)
                 .currentPage(postSearch.getPage())
                 .pageSize(postSearch.getSize())
+                .totalCount(postTotalCount)
                 .build();
     }
 
