@@ -19,11 +19,10 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
 
     @Override
     public List<Post> getList(PostSearch postSearch) {
-        postSearch.toString();
         return jpqlQueryFactory.selectFrom(post)
                 .where(
-                        titleEq(postSearch.getTitle()),
-                        contentEq(postSearch.getContent())
+                        titleLike(postSearch.getTitle()),
+                        contentLike(postSearch.getContent())
                 )
                 .limit(postSearch.getSize())
                 .offset(postSearch.getOffset())
@@ -31,12 +30,22 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
                 .fetch();
     }
 
-    private BooleanExpression titleEq(String title) {
-        return StringUtils.hasText(title) ? post.title.eq(title) : null;
+    @Override
+    public Integer getListCount(PostSearch postSearch) {
+        return jpqlQueryFactory.selectFrom(post)
+                .where(
+                        titleLike(postSearch.getTitle()),
+                        contentLike(postSearch.getContent())
+                )
+                .fetch().size();
     }
 
-    private BooleanExpression contentEq(String content) {
-        return StringUtils.hasText(content) ? post.content.eq(content) : null;
+    private BooleanExpression titleLike(String title) {
+        return StringUtils.hasText(title) ? post.title.like("%" + title + "%") : null;
+    }
+
+    private BooleanExpression contentLike(String content) {
+        return StringUtils.hasText(content) ? post.content.like("%" + content + "%") : null;
     }
     //todo Post 엔티티에 유저 정보가 포함이 되면 해당 유저 정보조건으로 검색하는 로직을 추가 필요
 
