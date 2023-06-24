@@ -45,7 +45,6 @@ export const fetcher = async ({method, path, body, params}) => {
         const searchParams = new URLSearchParams(params);
         url += '?' + searchParams.toString();
     }
-    console.log("params", params);
     if (body) {
         fetchOptions.body = JSON.stringify(body);
     }
