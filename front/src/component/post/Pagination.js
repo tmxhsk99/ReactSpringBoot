@@ -2,10 +2,12 @@ import "./Pagination.css";
 import {useContext, useEffect} from "react";
 import {PostDispatchContext} from "../../pages/post/Post";
 import {PAGE_GROUP_SIZE} from "../../util/constUtil";
+import {useRecoilValue} from "recoil";
+import {postsState} from "../../state/post/postsState";
 
 const Pagination = ({totalCount,currentPage,pageSize}) => {
     const {onPageChange, onClickPrev, onClickNext} = useContext(PostDispatchContext);
-
+    const posts = useRecoilValue(postsState);
     const groupStartPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE + 1;
     const totalPage = (totalCount / pageSize) + (totalCount % pageSize != 0 ? 1 : 0);
     const pageNumbers = [];
@@ -23,19 +25,19 @@ const Pagination = ({totalCount,currentPage,pageSize}) => {
     return (<section className="Pagination">
             <div className="prev">
                 {currentPage > PAGE_GROUP_SIZE ?
-                    <div onClick={() => onClickPrev(currentPage, pageSize)}>이전</div> : ""}
+                    <div onClick={() => onClickPrev(currentPage, pageSize,posts.searchCondition)}>이전</div> : ""}
             </div>
             <div className="number">
                 {
                     pageNumbers.map(page => <div
                         key={page.pageNum}
-                        onClick={() => onPageChange(page.pageNum, pageSize, page.isSelected)}
+                        onClick={() => onPageChange(page.pageNum, pageSize, page.isSelected,posts.searchCondition)}
                         className={page.isSelected ? "selected" : "notSelected"}>{page.pageNum}</div>)
                 }
             </div>
             <div className="next">
                 {currentPage < totalPage && groupLastPage < totalPage ?
-                    <div onClick={() => onClickNext(currentPage, pageSize)}>다음</div> : ""}
+                    <div onClick={() => onClickNext(currentPage, pageSize,posts.searchCondition)}>다음</div> : ""}
             </div>
         </section>
     )
