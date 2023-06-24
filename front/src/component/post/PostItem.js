@@ -1,9 +1,9 @@
 import "./PostItem.css";
 import {Link} from "react-router-dom";
 
-const PostItem = ({id,title, content, type = "none", createdTime, updatedTime, commentCount = 0, nickName = "익명",viewCount = 0}) => {
+const PostItem = ({id,title, content, type = "none", createdTime, updatedTime, commentCount = 0, nickName = "익명",viewCount = 0,isSelected = false}) => {
     return (
-        <Link className="PostItem" to={`/post/detail/${id}`}>
+        <Link className={isSelected ? "isSelected PostItem":"PostItem"} to={`/post/detail/${id}`}>
             <div className="image">
                 <i className="fa-regular fa-file-lines"/>
             </div>
