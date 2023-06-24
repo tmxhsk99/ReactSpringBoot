@@ -1,3 +1,6 @@
+.isSelected {
+    background-color: #1ca8af33;
+}
 .PostDetail{
     position: relative;
     display: flex;

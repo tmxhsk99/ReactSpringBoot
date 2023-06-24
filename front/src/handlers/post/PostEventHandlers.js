@@ -9,7 +9,7 @@ import {PAGE_GROUP_SIZE} from "../../util/constUtil";
  * @param searchCondition
  * @returns {Promise<void>}
  */
-async function updatePostsState(setPosts, posts, pageNum, pageSize = posts.pageInfo.pageSize,
+export async function updatePostsState(setPosts, posts, pageNum, pageSize = posts.pageInfo.pageSize,
                                 searchCondition = {
                                     title: "",
                                     content: "",
@@ -58,14 +58,12 @@ async function updatePostsState(setPosts, posts, pageNum, pageSize = posts.pageI
  */
 export const handleOnPageChange = (navigate, posts, setPosts) => {
 
-    return async (pageNum, pageSize, isSelected) => {
-
+    return async (pageNum, pageSize, isSelected, searchCondition) => {
         if (isSelected) {
             return false;
         }
-        await updatePostsState(setPosts, posts, pageNum, pageSize);
+        await updatePostsState(setPosts, posts, pageNum, pageSize, searchCondition);
 
-        navigate("/post/list");
     }
 };
 /**
@@ -76,15 +74,13 @@ export const handleOnPageChange = (navigate, posts, setPosts) => {
  */
 export const handleOnClickPrev = (navigate, posts, setPosts) => {
 
-    return async (currentPage, pageSize) => {
+    return async (currentPage, pageSize, searchCondition) => {
         let prevGroupLastPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE) * PAGE_GROUP_SIZE;
         if (prevGroupLastPage <= 0) {
             prevGroupLastPage = 1;
         }
 
-        await updatePostsState(setPosts, posts, prevGroupLastPage);
-
-        navigate("/post/list")
+        await updatePostsState(setPosts, posts, prevGroupLastPage, posts.pageInfo.pageSize, searchCondition);
     };
 }
 /**
@@ -95,11 +91,10 @@ export const handleOnClickPrev = (navigate, posts, setPosts) => {
  */
 export const handleOnClickNext = (navigate, posts, setPosts) => {
 
-    return async (currentPage, pageSize) => {
+    return async (currentPage, pageSize, searchCondition) => {
         let nextGroupFirstPage = Math.floor((currentPage - 1) / PAGE_GROUP_SIZE + 1) * PAGE_GROUP_SIZE + 1;
 
-        await updatePostsState(setPosts, posts, nextGroupFirstPage);
-        navigate("/post/list");
+        await updatePostsState(setPosts, posts, nextGroupFirstPage, posts.pageInfo.pageSize, searchCondition);
     }
 }
 /**
@@ -111,13 +106,10 @@ export const handleOnClickNext = (navigate, posts, setPosts) => {
  */
 export const handleOnClickSearch = (navigate, posts, setPosts) => {
     return async (searchCondition) => {
-        console.log("searchCondition", searchCondition);
         let parsedSearchCondition = {};
         searchCondition.type.map((it) => {
             parsedSearchCondition[it] = searchCondition.keyword;
         });
-        console.log("parsedSearchCondition", parsedSearchCondition);
         await updatePostsState(setPosts, posts, 1, posts.pageInfo.pageSize, parsedSearchCondition);
-        navigate("/post/list");
     }
 }
