@@ -3,7 +3,7 @@ import PostListPage from "./PostListPage";
 import PostEditPage from "./PostEditPage";
 import PostAddPage from "./PostAddPage";
 import PostDetailPage from "./PostDetailPage";
-import {handleOnPageChange, handleOnClickPrev, handleOnClickNext, handleOnClickSearch} from "./PostEventHandlers";
+import {handleOnPageChange, handleOnClickPrev, handleOnClickNext, handleOnClickSearch} from "../../handlers/post/PostEventHandlers";
 import {useRecoilState} from "recoil";
 import React from "react";
 import {postsState} from "../../state/post/postsState";
