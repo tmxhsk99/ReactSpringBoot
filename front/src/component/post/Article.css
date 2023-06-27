@@ -1,0 +1,19 @@
+.Article {
+
+}
+
+.Article input, .Article .nes-textarea {
+    border-image-repeat: stretch;
+}
+.Article .title {
+    font-size: 3em;
+}
+.Article .content{
+    font-size: 3em;
+}
+.Article .content textarea {
+    min-height: 500px;
+    height: auto;
+    overflow: hidden;
+    resize: none;
+}

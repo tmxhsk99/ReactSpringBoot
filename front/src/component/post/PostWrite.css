@@ -1,0 +1,13 @@
+.PostWrite {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.PostWrite .write{
+    min-width: 950px;
+    width: 1200px;
+}
+

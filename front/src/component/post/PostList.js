@@ -14,6 +14,7 @@ import Search from "../common/Search";
 import {DEFAULT_POST_SEARCH_TYPE} from "../../util/constUtil";
 import {QueryKeys} from "../../query/queryClient";
 import {PostDispatchContext} from "../../pages/post/Post";
+import BasicNesBtn from "../common/button/BasicNesBtn";
 
 async function updatePostLocalStorage(response, posts) {
 
@@ -90,6 +91,12 @@ const PostList = () => {
                                 searchType={DEFAULT_POST_SEARCH_TYPE}
                                 searchEvent={onClickPostSearch}
                                 navigate={"/post/list"}
+                            />
+                        }
+                        rightChildren={
+                            <BasicNesBtn
+                                title={"글쓰기"}
+                                link={"/post/add"}
                             />
                         }
                     />
