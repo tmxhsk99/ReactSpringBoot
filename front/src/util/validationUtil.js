@@ -16,3 +16,29 @@ export const postSearchConditionGetKeyword = (searchCondition) => {
 
     return "";
 }
+
+/**
+ * 글 등록시 무결성 검증
+ * @param title
+ * @param post
+ * @returns {boolean}
+ */
+export const postCreateValidation = ({title, content}) => {
+    if(!title){
+        alert("제목을 입력해주세요.");
+        return false;
+    }
+    if(title.length > 100){
+        alert("제목은 100자 이하로 입력해주세요.");
+        return false;
+    }
+    if(!content){
+        alert("내용을 입력해주세요.");
+        return false;
+    }
+    if(content.length > 10000){
+        alert("제목은 10000자 이하로 입력해주세요.");
+        return false;
+    }
+    return true;
+}
