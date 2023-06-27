@@ -14,7 +14,7 @@ export const postGetFetcher = ({
                                    nikName = "",
                                }) => fetcher({
     method: "GET",
-    path: "/posts",
+    path: "/api/posts",
     params: {
         page: page,
         size: size,
@@ -23,8 +23,23 @@ export const postGetFetcher = ({
         nikName: nikName,
     },
 })
-
+/**
+ * 게시글 단일 조회
+ * @param id
+ * @returns {Promise<*>}
+ */
 export const postFindByIdFetcher = ({id}) => fetcher({
     method: "GET",
-    path: `/posts/${id}`,
+    path: `/api/posts/${id}`,
 })
+/**
+ * 게시글 등록
+ * @param title
+ * @param content
+ * @returns {Promise<*>}
+ */
+export const postCreateFetcher = ({title, content}) => fetcher({
+    method: "POST",
+    path: "/api/posts",
+    body: {title, content}
+});

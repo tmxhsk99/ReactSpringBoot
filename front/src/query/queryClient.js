@@ -33,7 +33,7 @@ export const fetcher = async ({method, path, body, params}) => {
     let RequestInit;
     const fetchOptions = RequestInit = {
         method,
-        header: {
+        headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': POST_API_DOMAIN,
         }
@@ -48,13 +48,17 @@ export const fetcher = async ({method, path, body, params}) => {
     if (body) {
         fetchOptions.body = JSON.stringify(body);
     }
-
     const resPostData = await fetch(url, fetchOptions)
         .then(res => {
             if (!res.ok) {
                 throw new Error(`errorCode : ${res.status} \nerrorMsg : ${res.json()}`);
             }
-            return res.json();
+            // 응답값 여부를 확인한다.
+           const contentType = res.headers.get('content-type');
+           if (contentType && contentType.indexOf('application/json') !== -1) {
+             return res.json();
+           }
+           return {content:"response body is empty"};
         })
         .catch((e) => {
             console.error(e);
