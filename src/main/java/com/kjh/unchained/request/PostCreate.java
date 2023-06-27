@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class PostCreate {
 
     @NotBlank(message = "타이틀을 입력해주세요.")
-    @Size(max = 50, message = "타이틀은 50자 이내로 입력해주세요.")
+    @Size(max = 100, message = "타이틀은 100자 이내로 입력해주세요.")
     private String title;
 
     // 이걸 달아주면 검증을해준다 . @RequestBody 옆에 @Valid 선언을 해두면
