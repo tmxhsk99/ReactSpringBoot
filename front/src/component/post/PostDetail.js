@@ -23,12 +23,14 @@ const PostDetail = ({postId}) => {
     const [lastPressButton, setLastPressButton] = useState("none");
 
     const response = useQuery([QueryKeys.POSTS, {id: postId}]
-        , () => postFindByIdFetcher({id: postId}));
+        , () => postFindByIdFetcher({id: postId}), {
+                        cacheTime: 0,
+                        staleTime: 0,
+                    });
 
     // 최초 로드시 게시글 상세를 가져온다.
     useEffect(() => {
         const findDetail = posts.postList.find((post) => post.id === Number(postId));
-
         if (findDetail) {
             setFindPost(findDetail);
         } else {
@@ -88,7 +90,6 @@ const PostDetail = ({postId}) => {
             return;
         }
 
-        console.log(posts);
         posts.postList.forEach((post, idx) => {
             if (post.id === Number(postId) && idx < posts.postList.length - 1) {
                 nextPost = posts.postList[idx + 1];
@@ -142,18 +143,13 @@ const PostDetail = ({postId}) => {
                 <Aside/>
             </div>
         );
-    } else if (findPost != null) {
+    } else if (findPost != null && posts) {
         return (
             <div className="PostDetail">
                 <section className="detail nes-container">
                     <TitleContainer title={findPost.title}/>
                     <WriterInfoContainer
-                        userImageUrl={findPost.userImageUrl}
-                        nickName={findPost.nickName}
-                        viewCount={findPost.viewCount}
-                        likeCount={findPost.likeCount}
-                        createdTime={findPost.createdTime}
-                        writer={findPost.writer}
+                        findPost={findPost}
                     />
                     <div className="content nes-container">{findPost.content}</div>
                     <HorizonButtonList
