@@ -43,3 +43,25 @@ export const postCreateFetcher = ({title, content}) => fetcher({
     path: "/api/posts",
     body: {title, content}
 });
+/**
+ * 게시글 수정
+ * @param title
+ * @param content
+ * @param postId
+ * @returns {Promise<*>}
+ */
+export const postUpdateFetcher = ({title, content, id}) => fetcher({
+    method: "PATCH",
+    path:`/api/posts/${id}`,
+    body: {title, content},
+},);
+/**
+ * 게시글 삭제
+ * @param id
+ * @returns {Promise<*>}
+ */
+export const postDeleteFetcher = ({id}) => fetcher({
+    method: "DELETE",
+    path: `/api/posts/${id}`,
+    body: {id},
+},);
