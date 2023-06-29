@@ -1,0 +1,57 @@
+.PostEditDeleteShare {
+
+}
+
+.PostEditDeleteShare .buttons {
+    margin-right: 10px;
+}
+
+.PostEditDeleteShare .buttons svg {
+    height: 20px;
+    width: 20px;
+}
+
+.PostEditDeleteShare .popUp {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    max-height: 416px;
+    padding: 8px;
+    overflow-y: auto;
+    word-break: keep-all;
+    white-space: nowrap;
+    background-color: #fff;
+    border: 1px solid rgb(0 0 0 / 5%);
+    border-radius: 8px;
+}
+
+.PostEditDeleteShare .isActive {
+    display: flex;
+    flex-direction: column
+}
+
+.PostEditDeleteShare .popUp li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 2em;
+}
+
+.PostEditDeleteShare .popUp button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    font-size: 1em;
+    color: #000;
+    background-color: transparent;
+    border: 0;
+    border-radius: 8px;
+}
