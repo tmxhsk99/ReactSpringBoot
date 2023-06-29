@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Builder
@@ -13,10 +14,11 @@ public class PostEdit {
     private Long id;
 
     @NotBlank(message = "타이틀을 입력해주세요.")
+    @Size(max = 100, message = "타이틀은 100자 이내로 입력해주세요.")
     private String title;
 
-    // 이걸 달아주면 검증을해준다 . @RequestBody 옆에 @Valid 선언을 해두면
     @NotBlank(message = "내용를 입력해주세요")
+    @Size(max = 1000, message = "내용은 1000자 이내로 입력해주세요.")
     private String content;
 
     public PostEdit() {
