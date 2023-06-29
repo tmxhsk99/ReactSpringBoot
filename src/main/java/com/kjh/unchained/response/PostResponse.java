@@ -10,10 +10,6 @@ import lombok.ToString;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 
-/**
- 서비스 정책에 맞는 PostResponse
- 1. 타이틀을 10글자로 제한된다.
- */
 @Getter
 @ToString
 public class PostResponse {
@@ -25,8 +21,8 @@ public class PostResponse {
 
     public PostResponse(Post post) {
         this.id = post.getId();
-        this.title = post.getTitle().substring(0,Math.min(post.getTitle().length(),50));
-        this.content = post.getContent();
+        this.title = post.getTitle().substring(0,Math.min(post.getTitle().length(),100));
+        this.content = post.getContent().substring(0, Math.min(post.getContent().length(), 10000));
         this.createdTime = post.getCreatedTime().atZone(ZoneOffset.UTC).format(FormatUtil.UTC_DATE_TIME);
         this.updatedTime = post.getUpdatedTime().atZone(ZoneOffset.UTC).format(FormatUtil.UTC_DATE_TIME);
     }
