@@ -15,13 +15,15 @@ import {useQuery} from "react-query";
 import {postFindByIdFetcher, postGetFetcher} from "../../query/post/postApiService";
 import {QueryKeys} from "../../query/queryClient";
 import {updatePostsState} from "../../handlers/post/PostEventHandlers";
+import {useNavigate} from "react-router-dom";
 
 
 const PostDetail = ({postId}) => {
     const [posts, setPosts] = useRecoilState(postsState);
     const [findPost, setFindPost] = useState('loading');
     const [lastPressButton, setLastPressButton] = useState("none");
-
+    const navigate = useNavigate();
+    const [currentPage,setCurrentPage] = useState(0);
     const response = useQuery([QueryKeys.POSTS, {id: postId}]
         , () => postFindByIdFetcher({id: postId}), {
                         cacheTime: 0,
@@ -66,7 +68,14 @@ const PostDetail = ({postId}) => {
                 setFindPost(posts.postList[posts.postList.length - 1]);
             }
         }
+        setCurrentPage(Number(posts.pageInfo.currentPage));
     }, [posts]);
+
+    useEffect(() => {
+        if(Number(currentPage) !== 0 && Number(currentPage) !== Number(posts.pageInfo.currentPage)) {
+            navigate(`/post/list?page=${posts.pageInfo.currentPage}&size=${posts.pageInfo.pageSize}`);
+        }
+    }, [posts.pageInfo]);
 
     // 현재 글리스트 상태에 없는 경우 다시 API를 호출하여 리스트를 가져온다.
     const fetchPosts = async (changedPage) => {
@@ -134,7 +143,7 @@ const PostDetail = ({postId}) => {
         }
         return false;
     }
-    
+
     if (findPost === "loading") {
         return (
             <div className="PostDetail">
