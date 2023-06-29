@@ -134,9 +134,9 @@ class PostControllerTest {
         mockMvc.perform(get("/api/posts?page=0&size=10")
                         .contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.postList.length()", is(10)))
-                .andExpect(jsonPath("$.postList[0].title", is("kjh 제목19")))
-                .andExpect(jsonPath("$.postList[0].content", is("content19")))
+                .andExpect(jsonPath("$.length()", is(10)))
+                .andExpect(jsonPath("$.[0].title", is("kjh 제목19")))
+                .andExpect(jsonPath("$.[0].content", is("content19")))
                 .andDo(print());
 
     }
@@ -207,7 +207,7 @@ class PostControllerTest {
         String jsonString = objectMapper.writeValueAsString(request);
 
         //제목을 제거한다.
-        mockMvc.perform(post("/api/posts")
+        mockMvc.perform(post("/posts")
                         .contentType(APPLICATION_JSON)
                         .content(jsonString)
                 )
