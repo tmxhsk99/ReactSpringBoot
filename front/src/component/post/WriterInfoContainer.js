@@ -1,7 +1,8 @@
 import "./WriterInfoContainer.css";
 import WriterInfo from "./WriterInfo";
-import WriterAuth from "./WrtierAuth";
+import WriterAuth from "./WriterAuth";
 import useAuthCheck from "../hooks/user/useAuthCheck";
+import PostEditDeleteShare from "./PostEditDeleteShare";
 
 /**
  * 글쓴이 정보를 담고 있는 컴포넌트
@@ -14,21 +15,26 @@ import useAuthCheck from "../hooks/user/useAuthCheck";
  * @returns {JSX.Element}
  * @constructor
  */
-const WriterInfoContainer = ({userImageUrl = null, nickName = "익명", viewCount = 0, createdTime, likeCount = 0}) => {
+const WriterInfoContainer = ({findPost: findPost}) => {
+
     const authCheck = useAuthCheck();
 
     return (
         <div className="WriterInfoContainer">
             <WriterInfo
-                createdTime={createdTime}
-                userImageUrl={userImageUrl}
-                nickName={nickName}
-                viewCount={viewCount}
-                likeCount={likeCount}
+                createdTime={findPost.createdTime}
+                userImageUrl={findPost.userImageUrl}
+                nickName={findPost.nickName}
+                viewCount={findPost.viewCount}
+                likeCount={findPost.likeCount}
             />
+            <div className="right">
+                <PostEditDeleteShare findPost={findPost}/>
+            </div>
             {authCheck && (
                 <WriterAuth/>
             )}
+
         </div>
     );
 
