@@ -15,6 +15,7 @@ import {DEFAULT_POST_SEARCH_TYPE} from "../../util/constUtil";
 import {QueryKeys} from "../../query/queryClient";
 import {PostDispatchContext} from "../../pages/post/Post";
 import BasicNesBtn from "../common/button/BasicNesBtn";
+import {updatePostsState} from "../../handlers/post/PostEventHandlers";
 
 async function updatePostLocalStorage(response, posts) {
 
@@ -33,7 +34,7 @@ async function updatePostLocalStorage(response, posts) {
 
 const PostList = () => {
     const [posts, setPosts] = useRecoilState(postsState);
-    //todo 상태값과 localStorage 를 어떻게 사용할지 고민하기
+
     const response =
         useQuery([QueryKeys.POSTS,
                 {
@@ -63,12 +64,13 @@ const PostList = () => {
     useEffect(() => {
         if (response.isSuccess) {
             void updatePostLocalStorage(response, posts);
+            void updatePostsState(setPosts, response.data, response.data.pageInfo.currentPage, response.data.pageInfo.pageSize, posts.searchCondition)
         }
-
     }, [response.isSuccess]);
+
     useEffect(() => {
         void response.refetch();
-    }, [posts]);
+    }, [posts.pageInfo,posts.searchCondition]);
 
 
     if (response.isSuccess) {
