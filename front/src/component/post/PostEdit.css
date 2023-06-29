@@ -1,0 +1,21 @@
+.PostEdit {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.PostEdit .edit {
+    min-width: 950px;
+    width: 1200px;
+}
+
+.PostEdit .content {
+    font-size: 3em;
+    min-height: 25vh;
+}
+
+.PostEdit .PostHeader {
+    margin-top: 5vh;
+}
