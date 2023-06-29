@@ -6,6 +6,7 @@ import com.kjh.unchained.repository.jpa.PostRepository;
 import com.kjh.unchained.request.PostCreate;
 import com.kjh.unchained.request.PostEdit;
 import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -177,11 +178,11 @@ class PostServiceTest {
                 .build();
 
         //when
-        List<PostResponse> posts = postService.getList(postSearch);
+        PostListResponse posts = postService.getList(postSearch);
 
         //then
-        assertThat(posts.size()).isEqualTo(10L);
-        assertThat(posts.get(0).getTitle()).isEqualTo("kjh 제목19");
+        assertThat(posts.getPostList().size()).isEqualTo(10L);
+        assertThat(posts.getPostList().get(0).getTitle()).isEqualTo("kjh 제목19");
 
 
     }
@@ -201,7 +202,7 @@ class PostServiceTest {
 
         //then
         assertThat(returnPost).isNotNull();
-        assertThat(returnPost.getTitle()).isEqualTo("1234567890");
+        assertThat(returnPost.getTitle()).isEqualTo("123456789012345");
         assertThat(returnPost.getContent()).isEqualTo("gle");
     }
 
