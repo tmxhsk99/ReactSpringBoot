@@ -15,7 +15,7 @@ const PostWrite = () => {
             <Aside/>
             <section className="write nes-container">
                 <TitleContainer title={"글쓰기"}/>
-                <Article/>
+                <Article type={"add"}/>
             </section>
             <Aside/>
         </div>
