@@ -11,7 +11,7 @@ public class WebMvcController implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 //.allowedOrigins("http://juheyon.com", "https://juheyon.com")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedMethods("GET", "POST", "PATCH", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
