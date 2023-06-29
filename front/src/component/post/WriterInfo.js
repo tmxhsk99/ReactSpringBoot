@@ -1,7 +1,7 @@
 import "./WriterInfoContainer.css";
 import defaultUserImage from "../../assets/img/common/userImage.png";
 
-const WriterInfo = ({userImageUrl, nickName, viewCount, createdTime, likeCount}) => {
+const WriterInfo = ({userImageUrl = null, nickName ="익명", viewCount = 0, createdTime, likeCount = 0}) => {
 
     return (
         <div className="WriterInfo">

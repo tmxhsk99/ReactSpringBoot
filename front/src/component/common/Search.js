@@ -38,7 +38,6 @@ const Search = ({searchType, searchEvent}) => {
 
     const handleChangeSelect = (e) => {
         // 검색조건 배열
-        console.log(e.target.value);
         setSearchTypeState(e.target.value.split(","));
         setDefaultSearchType(e.target.value);
 

@@ -1,6 +1,6 @@
 import "./WriterInfoContainer.css";
 
-const WrtierAuth = () => {
+const WriterAuth = () => {
     // todo 로그인 시 공유,차단,신고 기능을을 보여준다 추후 해당 기능 요청 기능 추가
     return (
         <div className="WriterAuth">
@@ -31,4 +31,4 @@ const WrtierAuth = () => {
     );
 }
 
-export default WrtierAuth;
+export default WriterAuth;
