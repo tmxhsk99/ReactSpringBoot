@@ -1,17 +1,27 @@
 import "./PostEditDeleteShare.css"
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {postDeleteFetcher} from "../../query/post/postApiService";
 
 const PostEditDeleteShare = ({findPost}) => {
     const [isClicked, setIsClicked] = useState(false);
-    const handleOnClick = () => {
+    const isActivePopUp = isClicked ? "popUp isActive" : "popUp";
+    const navigate = useNavigate();
+
+    const onEditBtnClick = () => {
         setIsClicked(!isClicked);
     }
-    const isActivePopUp = isClicked ? "popUp isActive" : "popUp";
 
+    const onDeleteBtnClick = () => {
+        const result = window.confirm("정말 삭제하시겠습니까?");
+        if (result) {
+            void postDeleteFetcher({id: findPost.id});
+            navigate("/post/list");
+        }
+    }
     return (
         <div className="PostEditDeleteShare">
-            <div onClick={handleOnClick} className="buttons">
+            <div onClick={onEditBtnClick} className="buttons">
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-v"
                      className="svg-inline--fa fa-ellipsis-v fa-w-6" role="img" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 192 512">
@@ -27,12 +37,12 @@ const PostEditDeleteShare = ({findPost}) => {
                         </button>
                     </Link>
                 </li>
-                <li className="delete">
-                    <button name="submit" value="delete"><i className="fa-regular fa-trash-alt"></i>&nbsp;삭제
+                <li className="delete" onClick={onDeleteBtnClick}>
+                    <button><i className="fa-regular fa-trash-alt"></i>&nbsp;삭제
                     </button>
                 </li>
                 <li className="share">
-                    <button type="button" id="share"><i className="fa-solid fa-share-from-square"></i>공유
+                    <button type="button" id="share"><i className="fa-solid fa-share-from-square"></i>&nbsp;공유
                     </button>
                 </li>
             </ul>
