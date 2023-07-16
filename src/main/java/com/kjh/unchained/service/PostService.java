@@ -62,13 +62,13 @@ public class PostService {
 
     public PostListResponse getList(PostSearch postSearch) {
 
-        log.info("[PostService:postSearch]"+ postSearch.toString());
+        log.info("[PostService:postSearch]" + postSearch.toString());
         List<PostResponse> postResponseList = postRepository.getList(postSearch).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
 
         long postTotalCount = postRepository.getListCount(postSearch).longValue();
-        log.info("[PostService:postResponseList]"+ postResponseList.toString());
+        log.info("[PostService:postResponseList]" + postResponseList.toString());
 
         return PostListResponse.builder()
                 .postList(postResponseList)

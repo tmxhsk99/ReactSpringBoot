@@ -6,6 +6,7 @@ import com.kjh.unchained.request.PostSearch;
 import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import com.kjh.unchained.service.PostService;
+import com.kjh.unchained.springconfig.web.data.UserSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -25,25 +26,24 @@ public class PostController {
 
 
     @DeleteMapping("/api/posts/{postId}")
-    public void delete(@PathVariable long postId){
+    public void delete(@PathVariable long postId) {
         postService.delete(postId);
     }
 
     @PatchMapping("/api/posts/{postId}")
-    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request){
+    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request) {
         return postService.edit(postId, request);
     }
 
     /**
-     *
      * @param postSearch
      * @return
      */
     @GetMapping("/api/posts")
     public PostListResponse getList(@ModelAttribute @Valid PostSearch postSearch) {
-        log.info("[PostController:/post]"+ postSearch.toString()+"\n");
+        log.info("[PostController:/post]" + postSearch.toString() + "\n");
         PostListResponse result = postService.getList(postSearch);
-        log.info("[PostController:result]"+ result.toString());
+        log.info("[PostController:result]" + result.toString());
         return result;
     }
 
@@ -68,6 +68,11 @@ public class PostController {
     public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
         request.validate();
         postService.write(request);
+    }
+
+    @GetMapping("/api/auth")
+    public String auth(UserSession userSession) {
+        return userSession.toString();
     }
 
 }
