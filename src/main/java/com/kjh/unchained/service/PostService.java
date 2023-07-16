@@ -27,7 +27,7 @@ public class PostService {
     public PostResponse edit(Long id, PostEdit postEditDto) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFound());
+                .orElseThrow(PostNotFound::new);
 
         PostEditor.PostEditorBuilder editorBuilder = post.toEditor();
 
@@ -54,11 +54,9 @@ public class PostService {
     public PostResponse get(Long id) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFound());
+                .orElseThrow(PostNotFound::new);
 
-        PostResponse response = new PostResponse(post);
-
-        return response;
+        return new PostResponse(post);
     }
 
 
@@ -82,7 +80,7 @@ public class PostService {
 
     public void delete(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new PostNotFound());
+                .orElseThrow(PostNotFound::new);
 
         postRepository.delete(post);
     }
