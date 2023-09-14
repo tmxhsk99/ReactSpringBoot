@@ -22,3 +22,6 @@ spring:
         logging.level:
         org.hibernate.SQL: debug
     defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
