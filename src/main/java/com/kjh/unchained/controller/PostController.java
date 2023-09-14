@@ -1,22 +1,17 @@
 package com.kjh.unchained.controller;
 
-import com.kjh.unchained.request.PostCreate;
-import com.kjh.unchained.request.PostEdit;
-import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.request.post.PostCreate;
+import com.kjh.unchained.request.post.PostEdit;
+import com.kjh.unchained.request.post.PostSearch;
 import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import com.kjh.unchained.service.PostService;
 import com.kjh.unchained.springconfig.web.data.UserSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RestController

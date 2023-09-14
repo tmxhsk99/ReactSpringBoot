@@ -1,8 +1,8 @@
-package com.kjh.unchained.repository.jpa;
+package com.kjh.unchained.repository.jpa.post;
 
 import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.domain.QPost;
-import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.request.post.PostSearch;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPQLQueryFactory;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
-package com.kjh.unchained.repository.jpa;
+package com.kjh.unchained.repository.jpa.post;
 
 import com.kjh.unchained.domain.Post;
-import com.kjh.unchained.request.PostSearch;
+import com.kjh.unchained.request.post.PostSearch;
 
 import java.util.List;
 

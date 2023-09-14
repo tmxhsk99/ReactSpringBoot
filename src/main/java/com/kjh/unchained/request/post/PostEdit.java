@@ -1,4 +1,4 @@
-package com.kjh.unchained.request;
+package com.kjh.unchained.request.post;
 
 import lombok.Builder;
 import lombok.Getter;

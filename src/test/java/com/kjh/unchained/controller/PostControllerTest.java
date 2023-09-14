@@ -2,9 +2,9 @@ package com.kjh.unchained.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.domain.Post;
-import com.kjh.unchained.repository.jpa.PostRepository;
-import com.kjh.unchained.request.PostCreate;
-import com.kjh.unchained.request.PostEdit;
+import com.kjh.unchained.repository.jpa.post.PostRepository;
+import com.kjh.unchained.request.post.PostCreate;
+import com.kjh.unchained.request.post.PostEdit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
