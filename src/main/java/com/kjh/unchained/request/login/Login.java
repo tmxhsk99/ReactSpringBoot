@@ -1,5 +1,6 @@
 package com.kjh.unchained.request.login;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.Valid;
@@ -14,7 +15,7 @@ public class Login {
 
     public Login() {
     }
-
+    @Builder
     public Login(String email, String password) {
         this.email = email;
         this.password = password;
