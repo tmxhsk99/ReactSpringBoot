@@ -1,5 +1,8 @@
 package com.kjh.unchained.springconfig.web.data;
 
+import lombok.Getter;
+
+@Getter
 public class UserSession {
 
     private final Long id;
@@ -10,8 +13,6 @@ public class UserSession {
 
     @Override
     public String toString() {
-        return "UserSession{" +
-                "id=" + id +
-                '}';
+        return String.format("UserSession{ id = %d }", id);
     }
 }

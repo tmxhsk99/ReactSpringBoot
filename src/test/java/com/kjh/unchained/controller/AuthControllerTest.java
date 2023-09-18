@@ -49,7 +49,7 @@ class AuthControllerTest {
 
         @Nested
         @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-        class 요청로그인정보가_유효한경우 {
+        class 요청_로그인정보가_유효한경우 {
             private Login VALID_LOGIN;
             private User LOGIN_USER;
             @BeforeEach

@@ -65,9 +65,4 @@ public class PostController {
         postService.write(request);
     }
 
-    @GetMapping("/api/auth")
-    public String auth(UserSession userSession) {
-        return userSession.toString();
-    }
-
 }
