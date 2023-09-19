@@ -8,6 +8,10 @@ public class UnAuthorized extends MyBaseException{
         super(MESSAGE);
     }
 
+    public UnAuthorized(String message) {
+        super(message);
+    }
+
     @Override
     public int getStatusCode() {
         return 401;
