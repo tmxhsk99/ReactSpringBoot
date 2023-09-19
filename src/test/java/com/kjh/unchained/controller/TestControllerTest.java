@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.Cookie;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -51,8 +53,10 @@ class TestControllerTest {
             @DisplayName("세션 정보를 반환한다.")
             @Test
             void It_returns_session_information() throws Exception {
+                Cookie sessionCookie = new Cookie("SESSION", session.getAccessToken());
+
                 mockMvc.perform(get("/api/test/session")
-                                .header("Authorization", session.getAccessToken())
+                                .cookie(sessionCookie)
                                 .contentType("application/json"))
                         .andExpect(status().isOk())
                         .andDo(print());
@@ -67,8 +71,9 @@ class TestControllerTest {
             @DisplayName("UnAuthorized 예외를 반환한다.")
             @Test
             void It_returns_session_information() throws Exception {
+                Cookie sessionCookie = new Cookie("SESSION", session.getAccessToken() +"INVALID");
                 mockMvc.perform(get("/api/test/session")
-                                .header("Authorization", session.getAccessToken() +"INVALID")
+                                .cookie(sessionCookie)
                                 .contentType("application/json"))
                         .andExpect(status().isUnauthorized())
                         .andDo(print());
