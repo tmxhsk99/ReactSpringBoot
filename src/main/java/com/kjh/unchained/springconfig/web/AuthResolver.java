@@ -4,7 +4,12 @@ import com.kjh.unchained.domain.Session;
 import com.kjh.unchained.exception.UnAuthorized;
 import com.kjh.unchained.repository.jpa.session.SessionRepository;
 import com.kjh.unchained.springconfig.web.data.UserSession;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.StringUtils;
@@ -19,7 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class AuthResolver implements HandlerMethodArgumentResolver {
 
-    private final SessionRepository sessionRepository;
+    @Value("${jwt.secret}")
+    private String KEY;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -45,17 +51,24 @@ public class AuthResolver implements HandlerMethodArgumentResolver {
                 sessionCookie = cookie;
             }
         }
-        String accessToken = sessionCookie.getValue();
+        String jws = sessionCookie.getValue();
 
-        if (!StringUtils.hasText(accessToken)) {
+        if (!StringUtils.hasText(jws)) {
             throw new UnAuthorized("accessToken이 존재하지 않습니다.");
         }
 
-        // 데이터 베이스 사용자 확인 작업
-        Session session = sessionRepository.findByAccessToken(accessToken)
-                .orElseThrow(UnAuthorized::new);
+        byte[] decodeKey = Base64.decodeBase64(KEY);
+        try {
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
+                    .setSigningKey(decodeKey)
+                    .build()
+                    .parseClaimsJws(jws);
 
-        // UserSession
-        return new UserSession(session.getUser().getId());
+            String userId = claimsJws.getBody().getSubject();
+            // UserSession
+            return new UserSession(Long.getLong(userId));
+        } catch (Exception e) {
+            throw new UnAuthorized("accessToken이 유효하지 않습니다.");
+        }
     }
 }

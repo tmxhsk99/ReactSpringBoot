@@ -25,3 +25,5 @@ spring:
   sql:
     init:
       mode: always
+jwt:
+  secret: "Q3zTqhZVcfl17cKZzBbeQVZ41AAuthQYcCWEPLrVm+8="

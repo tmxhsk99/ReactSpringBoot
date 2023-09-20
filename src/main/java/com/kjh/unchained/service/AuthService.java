@@ -15,14 +15,14 @@ public class AuthService {
     private final UserRepository userRepository;
 
     @Transactional
-    public String signIn(Login request) {
+    public Long signIn(Login request) {
         // DB 에서 조회
         User user = userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword())
                 .orElseThrow(InvalidSigninInformation::new);
 
         // 세션 생성
-        Session session = user.addSession();
+        user.addSession();
 
-        return session.getAccessToken();
+        return user.getId();
     }
 }

@@ -8,6 +8,8 @@ import com.kjh.unchained.request.login.Login;
 import com.kjh.unchained.service.AuthService;
 import com.kjh.unchained.testutil.fixture.AuthFixture;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.crypto.SecretKey;
+
+import java.util.Base64;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -52,6 +58,7 @@ class AuthControllerTest {
         class 요청_로그인정보가_유효한경우 {
             private Login VALID_LOGIN;
             private User LOGIN_USER;
+
             @BeforeEach
             void setUp() {
                 userRepository.deleteAll();
@@ -106,5 +113,13 @@ class AuthControllerTest {
                         .contains("accessToken");
             }
         }
+    }
+
+    @Test
+    @DisplayName("키 생성 테스트")
+    public void test() {
+        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        String strKey = new String(Base64.getEncoder().encode(key.getEncoded()));
+        System.out.println(strKey);
     }
 }

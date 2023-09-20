@@ -1,5 +1,0 @@
-### 테스트 인증 요청
-
-GET http://localhost:8080/api/auth
-Content-Type: application/json
-Authorization: asdf
