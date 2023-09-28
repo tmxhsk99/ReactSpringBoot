@@ -5,6 +5,7 @@ import com.kjh.unchained.domain.User;
 import com.kjh.unchained.exception.InvalidSigninInformation;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.login.Login;
+import com.kjh.unchained.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
     @Transactional
     public Long signIn(Login request) {
@@ -21,7 +23,7 @@ public class AuthService {
                 .orElseThrow(InvalidSigninInformation::new);
 
         // 세션 생성
-        user.addSession();
+        user.addSession(jwtUtil);
 
         return user.getId();
     }

@@ -1,5 +1,6 @@
 package com.kjh.unchained.domain;
 
+import com.kjh.unchained.util.JwtUtil;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,9 +41,10 @@ public class User {
     }
 
 
-    public Session addSession() {
+    public Session addSession(JwtUtil jwtUtil) {
         Session session = Session.builder()
                 .user(this)
+                .jwtUtil(jwtUtil)
                 .build();
 
         sessions.add(session);

@@ -27,3 +27,5 @@ spring:
       mode: always
 jwt:
   secret: "Q3zTqhZVcfl17cKZzBbeQVZ41AAuthQYcCWEPLrVm+8="
+  expiration: 86400000 # 1 day
+

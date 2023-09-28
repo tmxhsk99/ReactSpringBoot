@@ -1,5 +1,7 @@
 package com.kjh.unchained.domain;
 
+import com.kjh.unchained.springconfig.app.JwtAppConfig;
+import com.kjh.unchained.util.JwtUtil;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,8 +26,9 @@ public class Session {
     private User user;
 
     @Builder
-    public Session(User user) {
-        this.accessToken = randomUUID().toString();
+    public Session(User user, JwtUtil jwtUtil) {
+        String jws = jwtUtil.createJws(user.getId());
+        this.accessToken = jws;
         this.user = user;
     }
 }

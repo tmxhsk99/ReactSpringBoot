@@ -1,6 +1,7 @@
 package com.kjh.unchained.springconfig.web;
 
 import com.kjh.unchained.repository.jpa.session.SessionRepository;
+import com.kjh.unchained.springconfig.app.JwtAppConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -13,6 +14,7 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
+    private final JwtAppConfig jwtAppConfig;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -26,6 +28,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new AuthResolver());
+        resolvers.add(new AuthResolver(jwtAppConfig));
     }
 }

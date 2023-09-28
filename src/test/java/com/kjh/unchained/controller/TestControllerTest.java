@@ -5,6 +5,7 @@ import com.kjh.unchained.domain.Session;
 import com.kjh.unchained.domain.User;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.testutil.fixture.AuthFixture;
+import com.kjh.unchained.util.JwtUtil;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.Cookie;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +33,10 @@ class TestControllerTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
+
     @Nested
     @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
     class testUserSession_메서드는 {
@@ -43,7 +47,7 @@ class TestControllerTest {
         void setUp() {
             userRepository.deleteAll();
             User user = AuthFixture.getValidUser();
-            session = user.addSession();
+            session = user.addSession(jwtUtil);
             userRepository.save(user);
         }
         @Nested
@@ -53,7 +57,9 @@ class TestControllerTest {
             @DisplayName("세션 정보를 반환한다.")
             @Test
             void It_returns_session_information() throws Exception {
-                Cookie sessionCookie = new Cookie("SESSION", session.getAccessToken());
+
+                String accessToken = session.getAccessToken();
+                Cookie sessionCookie = new Cookie("SESSION", accessToken);
 
                 mockMvc.perform(get("/api/test/session")
                                 .cookie(sessionCookie)

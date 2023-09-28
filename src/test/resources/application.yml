@@ -23,3 +23,7 @@ spring:
         logging.level:
         org.hibernate.SQL: debug
     defer-datasource-initialization: true
+jwt:
+  secret: "Q3zTqhZVcfl17cKZzBbeQVZ41AAuthQYcCWEPLrVm+8="
+  expiration: 86400000 # 1 day
+
