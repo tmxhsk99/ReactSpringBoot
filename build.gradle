@@ -49,9 +49,8 @@ dependencies {
 
     // 비밀번호 암호화를 위한 라이브러리
     implementation 'org.springframework.security:spring-security-crypto'
-
-    // bouncy castle
-    implementation 'org.bouncycastle:bcprov-jdk15on'
+    
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
