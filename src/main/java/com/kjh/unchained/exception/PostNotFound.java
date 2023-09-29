@@ -1,5 +1,7 @@
 package com.kjh.unchained.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class PostNotFound extends MyBaseException {
 
     private static final String MESSAGE = "존재하지 않는 글입니다.";
@@ -10,6 +12,6 @@ public class PostNotFound extends MyBaseException {
 
     @Override
     public int getStatusCode() {
-        return 404;
+        return HttpStatus.NOT_FOUND.value();
     }
 }
