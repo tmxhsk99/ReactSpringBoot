@@ -1,16 +1,20 @@
 package com.kjh.unchained.controller;
 
 import com.kjh.unchained.request.login.Login;
+import com.kjh.unchained.request.signup.SignUpRequest;
 import com.kjh.unchained.service.AuthService;
 import com.kjh.unchained.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 import java.time.Duration;
 
@@ -22,7 +26,12 @@ public class AuthController {
     private final AuthService authService;
     private final JwtUtil jwtUtil;
 
-
+    /**
+     * 로그인
+     *
+     * @param login
+     * @return
+     */
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(@RequestBody @Valid Login login) {
 
@@ -45,4 +54,16 @@ public class AuthController {
         return ResponseEntity.noContent()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString()).build();
     }
+
+    /**
+     * 회원가입
+     */
+    @PostMapping("/api/auth/signup")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void signUp(@RequestBody SignUpRequest signgUpRequest) {
+        
+        authService.signUp(signgUpRequest);
+
+    }
+
 }
