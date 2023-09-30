@@ -16,7 +16,7 @@ public class JwtUtil {
 
     private final JwtAppConfig jwtAppConfig;
 
-    public String createJws (Long userId){
+    public String createJws(Long userId) {
         SecretKeySpec secretKey = new SecretKeySpec(jwtAppConfig.jwtSecretKey, SignatureAlgorithm.HS256.getJcaName());
 
         String jws = Jwts.builder()

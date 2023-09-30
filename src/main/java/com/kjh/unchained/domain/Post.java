@@ -1,11 +1,11 @@
 package com.kjh.unchained.domain;
 
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

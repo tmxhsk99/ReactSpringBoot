@@ -1,14 +1,12 @@
 buildscript {
     ext {
-        queryDslVersion = "5.0.0"
-        asciidocVersion = "2.0.6.RELEASE"
+        asciidocVersion = "3.0.0"
     }
 }
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.3'
+    id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
@@ -18,7 +16,7 @@ ext {
 
 group = 'com.kjh'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -37,8 +35,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     //queryDsl Lib
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation 'com.querydsl:querydsl-core:5.0.0'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
 
     //RES DOC Lib
     asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${asciidocVersion}"
@@ -49,7 +51,7 @@ dependencies {
 
     // 비밀번호 암호화를 위한 라이브러리
     implementation 'org.springframework.security:spring-security-crypto'
-    
+
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 
     compileOnly 'org.projectlombok:lombok'
@@ -97,20 +99,3 @@ bootJar {
 jar {
     enabled = false
 }
-
-// querydsl setting start
-def querydslDir = "$buildDir/generated/querydsl"
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-sourceSets {
-    main.java.srcDir querydslDir
-}
-configurations {
-    querydsl.extendsFrom compileClasspath
-}
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
-}
-// querydsl setting end

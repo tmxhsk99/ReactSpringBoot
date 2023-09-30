@@ -1,10 +1,12 @@
 package com.kjh.unchained.request.post;
 
 import com.kjh.unchained.exception.InvalidRequest;
-import lombok.*;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -26,9 +28,9 @@ public class PostCreate {
         this.content = content;
     }
 
-    public void validate(){
-        if(title.contains("바보")){
-            throw new InvalidRequest("title","제목에 바보를 포함할 수 없습니다");
+    public void validate() {
+        if (title.contains("바보")) {
+            throw new InvalidRequest("title", "제목에 바보를 포함할 수 없습니다");
         }
     }
 }

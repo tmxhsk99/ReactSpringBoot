@@ -1,19 +1,19 @@
 package com.kjh.unchained.service;
 
+import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.domain.PostEditor;
 import com.kjh.unchained.exception.PostNotFound;
 import com.kjh.unchained.repository.jpa.post.PostRepository;
-import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.request.post.PostCreate;
 import com.kjh.unchained.request.post.PostEdit;
 import com.kjh.unchained.request.post.PostSearch;
 import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 

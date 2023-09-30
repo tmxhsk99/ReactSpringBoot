@@ -14,14 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.snippet.Attributes.key;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -50,7 +52,7 @@ public class PostControllerDocTest {
         postRepository.save(post);
 
         //expected
-        mockMvc.perform(get("/posts/{postId}", 1L)
+        mockMvc.perform(get("/api/posts/{postId}", 1L)
                         .accept(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -60,7 +62,9 @@ public class PostControllerDocTest {
                         responseFields(
                                 fieldWithPath("id").description("게시글 ID"),
                                 fieldWithPath("title").description("게시글 제목"),
-                                fieldWithPath("content").description("게시글 내용")
+                                fieldWithPath("content").description("게시글 내용"),
+                                fieldWithPath("createdTime").description("게시글 생성일"),
+                                fieldWithPath("updatedTime").description("게시글 수정일")
                         )
                 ));
     }
@@ -77,7 +81,7 @@ public class PostControllerDocTest {
         String json = objectMapper.writeValueAsString(request);
 
         //expected
-        mockMvc.perform(post("/posts/save")
+        mockMvc.perform(post("/api/posts")
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON)
                         .content(json))

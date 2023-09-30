@@ -1,8 +1,10 @@
 package com.kjh.unchained.request.post;
 
-import lombok.*;
-
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
