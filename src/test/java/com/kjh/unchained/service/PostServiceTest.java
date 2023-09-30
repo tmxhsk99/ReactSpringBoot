@@ -20,9 +20,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 class PostServiceTest {
@@ -57,6 +54,7 @@ class PostServiceTest {
         //then
         assertThat(postRepository.count()).isEqualTo(0);
     }
+
     @Test
     @DisplayName("글 삭제 실패 테스트 - PostNotFound()")
     void deletePosts_Exception() {
@@ -75,6 +73,7 @@ class PostServiceTest {
 
         assertThat(e.getMessage()).isEqualTo("존재하지 않는 글입니다.");
     }
+
     @Test
     @DisplayName("글 내용 수정 테스트")
     void postEdit3() throws Exception {
@@ -202,7 +201,7 @@ class PostServiceTest {
 
         //then
         assertThat(returnPost).isNotNull();
-        assertThat(returnPost.getTitle()).isEqualTo("1234567890");
+        assertThat(returnPost.getTitle()).isEqualTo("123456789012345");
         assertThat(returnPost.getContent()).isEqualTo("gle");
     }
 

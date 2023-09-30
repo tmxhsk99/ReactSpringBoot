@@ -1,12 +1,9 @@
 package com.kjh.unchained.testutil.fixture;
 
 import com.kjh.unchained.domain.User;
-import com.kjh.unchained.request.login.Login;
 import com.kjh.unchained.request.signup.SignUpRequest;
 import com.kjh.unchained.util.PasswordEncoderUtil;
-import org.junit.jupiter.params.provider.Arguments;
 
-import java.util.stream.Stream;
 
 public class AuthFixture {
 
@@ -20,27 +17,6 @@ public class AuthFixture {
                 .name("김주현")
                 .email(VALID_EMAIL)
                 .password(VALID_PASSWORD)
-                .build();
-    }
-
-    public static Login getValidLoginRequest() {
-        return Login.builder()
-                .email(VALID_EMAIL)
-                .password(VALID_PASSWORD)
-                .build();
-    }
-
-    public static Login getInValidLoginRequest_InvalidEmail() {
-        return Login.builder()
-                .email(VALID_EMAIL + "invalid")
-                .password(VALID_PASSWORD)
-                .build();
-    }
-
-    public static Login getInValidLoginRequest_InvalidPassword() {
-        return Login.builder()
-                .email(VALID_EMAIL)
-                .password(VALID_PASSWORD + "invalid")
                 .build();
     }
 
@@ -65,10 +41,5 @@ public class AuthFixture {
         return passwordEncodeUser;
     }
 
-    public static Stream<Arguments> provideInvalidLoginRequest() {
-        return Stream.of(
-                Arguments.of(getInValidLoginRequest_InvalidEmail()),
-                Arguments.of(getInValidLoginRequest_InvalidPassword())
-        );
-    }
+
 }

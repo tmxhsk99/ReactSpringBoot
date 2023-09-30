@@ -1,6 +1,5 @@
 package com.kjh.unchained.domain;
 
-import com.kjh.unchained.util.JwtUtil;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,9 +26,6 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Session> sessions = new ArrayList<>();
-
     @Builder
     public User(String name, String email, String password) {
         this.name = name;
@@ -40,15 +34,4 @@ public class User {
         this.createdAt = LocalDateTime.now();
     }
 
-
-    public Session addSession(JwtUtil jwtUtil) {
-        Session session = Session.builder()
-                .user(this)
-                .jwtUtil(jwtUtil)
-                .build();
-
-        sessions.add(session);
-
-        return session;
-    }
 }

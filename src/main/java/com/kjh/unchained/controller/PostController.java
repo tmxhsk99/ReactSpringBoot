@@ -6,7 +6,6 @@ import com.kjh.unchained.request.post.PostSearch;
 import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
 import com.kjh.unchained.service.PostService;
-import com.kjh.unchained.springconfig.web.data.UserSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
