@@ -60,9 +60,30 @@ public class AuthController {
      */
     @PostMapping("/api/auth/signup")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void signUp(@RequestBody SignUpRequest signgUpRequest) {
-        
-        authService.signUp(signgUpRequest);
+    public void signUp(@RequestBody SignUpRequest signUpRequest) {
+
+        authService.signUp(signUpRequest);
+
+    }
+
+
+    /**
+     * 로그아웃 처리
+     */
+    @PostMapping("/api/auth/signout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void signOut() {
+
+        ResponseCookie cookie = ResponseCookie.from("SESSION", "")
+                .domain("localhost") // todo 서버 환경에 따른 분리 필요
+                .httpOnly(true)
+                .path("/")
+                .secure(false) // todo https 적용시 true 로 변경
+                .maxAge(Duration.ZERO)
+                .sameSite("Strict")
+                .build();
+
+        log.info(">>>>>> cookie : {}", cookie);
 
     }
 
