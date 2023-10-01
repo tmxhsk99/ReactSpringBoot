@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 
@@ -20,6 +17,15 @@ public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * 로그인
+     */
+    @GetMapping("/api/auth/login")
+    public String login() {
+
+        return "로그인 페이지 입니다";
+
+    }
 
     /**
      * 회원가입
