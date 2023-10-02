@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.exception.AlreadyExistsUser;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.testutil.fixture.AuthFixture;
-import com.kjh.unchained.util.PasswordEncoderUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

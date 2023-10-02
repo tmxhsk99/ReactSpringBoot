@@ -1,3 +1,14 @@
+### 회원가입
+
+POST http://localhost:8080/api/auth/signup
+content-type: application/json
+
+{
+  "name": "우녕자",
+  "email": "admin@unchained.com",
+  "password": "1234"
+}
+
 ### 로그인 요청 api 방식
 
 POST http://localhost:8080/api/auth/login
@@ -25,3 +36,5 @@ email=admin@unchained.com&password=1234&remember=true
 ### 메인페이지 호출
 
 GET http://localhost:8080
+
+

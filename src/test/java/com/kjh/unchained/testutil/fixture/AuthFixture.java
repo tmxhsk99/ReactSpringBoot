@@ -2,7 +2,6 @@ package com.kjh.unchained.testutil.fixture;
 
 import com.kjh.unchained.domain.User;
 import com.kjh.unchained.request.signup.SignUpRequest;
-import com.kjh.unchained.util.PasswordEncoderUtil;
 
 
 public class AuthFixture {

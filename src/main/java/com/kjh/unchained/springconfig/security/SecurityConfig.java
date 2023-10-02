@@ -1,19 +1,18 @@
 package com.kjh.unchained.springconfig.security;
 
+import com.kjh.unchained.domain.User;
+import com.kjh.unchained.repository.jpa.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
@@ -44,7 +43,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(new MvcRequestMatcher(introspector, "/api/auth/login")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/auth/login", "POST")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/auth/signup", "POST")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> {
@@ -62,7 +62,6 @@ public class SecurityConfig {
                                     .tokenValiditySeconds(60 * 60 * 24 * 30); // 쿠키 유효기간 설정 (30일)
                         }
                 )
-                .userDetailsService(userDetailsService())
                 .httpBasic(withDefaults());
 
 
@@ -71,19 +70,30 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        UserDetails user = User.withUsername("admin@unchained.com")
-                .password("1234")
-                .roles("ADMIN")
-                .build();
-        manager.createUser(user);
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return username -> {
+            User user = userRepository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException(username + "를 찾을 수 없습니다."));
 
-        return manager;
+            return new UserPrincipal(user);
+        };
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+
+        int cpuCost = 16384;
+        int memoryCost = 8;
+        int parallelization = 1;
+        int keyLength = 32;
+        int saltLength = 64;
+
+        return new SCryptPasswordEncoder(
+                cpuCost,
+                memoryCost,
+                parallelization,
+                keyLength,
+                saltLength
+        );
     }
 }

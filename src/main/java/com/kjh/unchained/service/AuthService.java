@@ -4,8 +4,8 @@ import com.kjh.unchained.domain.User;
 import com.kjh.unchained.exception.AlreadyExistsUser;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.signup.SignUpRequest;
-import com.kjh.unchained.util.PasswordEncoderUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
-    private final PasswordEncoderUtil encoderUtil;
+    private final PasswordEncoder encoder;
 
     /**
      * 회원가입 요청을 받아 유효성 검증후 회원가입 처리를 진행한다.
@@ -31,7 +31,7 @@ public class AuthService {
         // 회원 비밀번호 암호화
         User user = User.builder()
                 .email(signUpRequest.getEmail())
-                .password(encoderUtil.encode(signUpRequest.getPassword()))
+                .password(encoder.encode(signUpRequest.getPassword()))
                 .name(signUpRequest.getName())
                 .build();
 
