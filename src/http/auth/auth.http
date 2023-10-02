@@ -15,4 +15,13 @@ Content-Type: application/x-www-form-urlencoded
 
 email=admin@unchained.com&password=1234
 
+### 로그인 요청 form 방식 remembmer 값추가
 
+POST http://localhost:8080/api/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+email=admin@unchained.com&password=1234&remember=true
+
+### 메인페이지 호출
+
+GET http://localhost:8080

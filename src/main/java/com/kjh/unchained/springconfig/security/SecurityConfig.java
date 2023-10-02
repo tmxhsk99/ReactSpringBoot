@@ -54,6 +54,14 @@ public class SecurityConfig {
                             .passwordParameter("password")
                             .defaultSuccessUrl("/");
                 })
+                .rememberMe((rememberMe) -> {
+                            rememberMe
+                                    .rememberMeParameter("remember") // 어떤 파라미터로 값이 넘어와야 자동로그인으로 설정할건지 설정
+                                    .rememberMeCookieName("remember-me") // 쿠키 이름 설정
+                                    .alwaysRemember(false) // true 로 설정하면, remember-me 쿠키가 없어도 항상 자동로그인
+                                    .tokenValiditySeconds(60 * 60 * 24 * 30); // 쿠키 유효기간 설정 (30일)
+                        }
+                )
                 .userDetailsService(userDetailsService())
                 .httpBasic(withDefaults());
 
