@@ -6,6 +6,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -41,9 +47,35 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspector, "/api/auth/login")).permitAll()
                         .anyRequest().authenticated()
                 )
+                .formLogin((form) -> {
+                    form.loginPage("/api/auth/login")
+                            .loginProcessingUrl("/api/auth/login")
+                            .usernameParameter("email")
+                            .passwordParameter("password")
+                            .defaultSuccessUrl("/");
+                })
+                .userDetailsService(userDetailsService())
                 .httpBasic(withDefaults());
+
 
         return http.build();
 
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        UserDetails user = User.withUsername("admin@unchained.com")
+                .password("1234")
+                .roles("ADMIN")
+                .build();
+        manager.createUser(user);
+
+        return manager;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 }

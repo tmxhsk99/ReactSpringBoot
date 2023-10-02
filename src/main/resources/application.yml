@@ -2,6 +2,7 @@ server:
   servlet:
     encoding:
       force-response: true
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb;NON_KEYWORDS=USER
@@ -19,7 +20,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        ddl-auto: create
+        ddl-auto: create-drop
         show_sql: true
         format_sql: true
         logging.level:
@@ -27,7 +28,7 @@ spring:
     defer-datasource-initialization: true
 
   sql:
-    init.mode: never # data.sql 실행여부
+    init.mode: never # data.sql 실행 여부
 jwt:
   secret: "Q3zTqhZVcfl17cKZzBbeQVZ41AAuthQYcCWEPLrVm+8="
   expiration: 86400000 # 1 day
