@@ -1,7 +1,12 @@
 package com.kjh.unchained.springconfig.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.domain.User;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
+import com.kjh.unchained.springconfig.security.handler.Http401Handler;
+import com.kjh.unchained.springconfig.security.handler.Http403Handler;
+import com.kjh.unchained.springconfig.security.handler.LoginFailHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,12 +27,14 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity(debug = true)
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final ObjectMapper objectMapper;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
+        return web -> web.ignoring()
                 .requestMatchers(toH2Console())
                 .requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
                 .requestMatchers(new AntPathRequestMatcher("/error"))
@@ -41,30 +48,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
 
+        String loginRequestURL = "/api/auth/login";
+
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(new AntPathRequestMatcher("/api/auth/login")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher(loginRequestURL)).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/auth/signup")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/user")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/admin")).access(
-                                new WebExpressionAuthorizationManager("hasRole('ADMIN') AND hasAuthority('WRITE')")
-                        )
+                        .requestMatchers(new AntPathRequestMatcher("/user")).hasAnyRole("USER")
+                        .requestMatchers(new AntPathRequestMatcher("/admin")).hasAnyRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin((form) -> {
-                    form.loginPage("/api/auth/login")
-                            .loginProcessingUrl("/api/auth/login")
-                            .usernameParameter("email")
-                            .passwordParameter("password")
-                            .defaultSuccessUrl("/");
-                })
-                .rememberMe((rememberMe) -> {
-                            rememberMe
-                                    .rememberMeParameter("remember") // 어떤 파라미터로 값이 넘어와야 자동로그인으로 설정할건지 설정
-                                    .rememberMeCookieName("remember-me") // 쿠키 이름 설정
-                                    .alwaysRemember(false) // true 로 설정하면, remember-me 쿠키가 없어도 항상 자동로그인
-                                    .tokenValiditySeconds(60 * 60 * 24 * 30); // 쿠키 유효기간 설정 (30일)
+                .formLogin(form ->
+                        form.loginPage(loginRequestURL)
+                                .loginProcessingUrl(loginRequestURL)
+                                .usernameParameter("email")
+                                .passwordParameter("password")
+                                .defaultSuccessUrl("/")
+                                .failureHandler(new LoginFailHandler(objectMapper))
+                )
+                .rememberMe(rememberMe ->
+                        rememberMe.rememberMeParameter("remember") // 어떤 파라미터로 값이 넘어와야 자동로그인으로 설정할건지 설정
+                                .rememberMeCookieName("remember-me") // 쿠키 이름 설정
+                                .alwaysRemember(false) // true 로 설정하면, remember-me 쿠키가 없어도 항상 자동로그인
+                                .tokenValiditySeconds(60 * 60 * 24 * 30) // 쿠키 유효기간 설정 (30일)
+
+                )
+                .exceptionHandling(
+                        e -> {
+                            e.accessDeniedHandler(new Http403Handler(objectMapper)); // 권한이 없을때
+                            e.authenticationEntryPoint(new Http401Handler(objectMapper)); // 인증이 안됐을때
                         }
                 )
                 .httpBasic(withDefaults());
