@@ -1,0 +1,11 @@
+
+### 게시글 작성
+
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+    "title": "제목",
+    "content": "내용"
+}
+

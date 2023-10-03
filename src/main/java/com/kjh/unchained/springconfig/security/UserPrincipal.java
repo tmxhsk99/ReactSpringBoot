@@ -19,7 +19,7 @@ public class UserPrincipal extends User {
                 user.getEmail(),
                 user.getPassword(),
                 List.of(
-                        new SimpleGrantedAuthority("ROLE_USER") // ROLE_ 를 붙여줘야함 그래야 역할로인식함 (권한은 그냥 쓰면됨),
+                        new SimpleGrantedAuthority("ROLE_ADMIN") // ROLE_ 를 붙여줘야함 그래야 역할로인식함 (권한은 그냥 쓰면됨),
                 )
         );
         this.userId = user.getId();
