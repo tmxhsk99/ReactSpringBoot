@@ -7,6 +7,7 @@ import com.kjh.unchained.springconfig.security.filter.EmailPasswordAuthFilter;
 import com.kjh.unchained.springconfig.security.handler.Http401Handler;
 import com.kjh.unchained.springconfig.security.handler.Http403Handler;
 import com.kjh.unchained.springconfig.security.handler.LoginFailHandler;
+import com.kjh.unchained.springconfig.security.handler.LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,9 +64,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(new AntPathRequestMatcher(LOGIN_REQUEST_URL)).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/auth/signup")).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(
                         usernamePasswordAuthFilter(),
@@ -106,7 +105,7 @@ public class SecurityConfig {
         EmailPasswordAuthFilter filter = new EmailPasswordAuthFilter(LOGIN_REQUEST_URL, objectMapper);
         filter.setAuthenticationManager(authenticationManager());
         // 기본적인 기능들은 있는것 가져다 써야한다.
-        filter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/"));
+        filter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
         filter.setAuthenticationFailureHandler(new LoginFailHandler(objectMapper));
 
         // 셋팅을 안해주면 세션이 발급이 안된다.
@@ -115,7 +114,7 @@ public class SecurityConfig {
         // remember-me 설정
         SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
         rememberMeServices.setAlwaysRemember(true); // 유효기간만큼의 세션을 발급한다.
-        rememberMeServices.setValiditySeconds(3600 * 24 * 30);
+        rememberMeServices.setValiditySeconds(3600 * 24 * 30); // 30일
         filter.setRememberMeServices(rememberMeServices);
         return filter;
     }
