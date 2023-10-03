@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -165,7 +166,11 @@ class PostControllerTest {
     }
 
     @Test
-    @DisplayName("/posts 요청시 DB에 값이 저장된다.")
+    @WithMockUser(username = "admin@unchained.com",
+            roles = {"ADMIN"},
+            password = "1234"
+    )
+    @DisplayName("요청자 권한이 ADMIN인 경우 글작성 요청 시 글이 저장된다.")
     void sendJson_db_save() throws Exception {
         //given
         PostCreate request = PostCreate
