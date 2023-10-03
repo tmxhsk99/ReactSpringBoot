@@ -9,6 +9,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -27,7 +28,7 @@ class AuthServiceTest {
     AuthService authService;
 
     @Autowired
-    PasswordEncoderUtil encoderUtil;
+    PasswordEncoder encoder;
 
     @Autowired
     UserRepository userRepository;
@@ -53,7 +54,7 @@ class AuthServiceTest {
                 userRepository.findByEmail(AuthFixture.VALID_EMAIL)
                         .ifPresent(user -> {
                             Assertions.assertThat(user.getEmail()).isEqualTo(AuthFixture.VALID_EMAIL);
-                            Assertions.assertThat(encoderUtil.matches(AuthFixture.VALID_PASSWORD, user.getPassword())).isTrue();
+                            Assertions.assertThat(encoder.matches(AuthFixture.VALID_PASSWORD, user.getPassword())).isTrue();
                             Assertions.assertThat(user.getName()).isEqualTo(AuthFixture.VALID_NAME);
                         });
             }
@@ -66,7 +67,7 @@ class AuthServiceTest {
             @BeforeEach
             void setUp() {
                 userRepository.deleteAll();
-                userRepository.save(AuthFixture.getValidUserWithEncodedPassword());
+                userRepository.save(AuthFixture.getValidUserWithEncodedPassword(encoder));
             }
 
             @Test
