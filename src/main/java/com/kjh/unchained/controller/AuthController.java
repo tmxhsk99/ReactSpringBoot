@@ -17,15 +17,6 @@ public class AuthController {
 
     private final AuthService authService;
 
-    /**
-     * 로그인
-     */
-    @GetMapping("/api/auth/login")
-    public String login() {
-
-        return "로그인 페이지 입니다";
-
-    }
 
     /**
      * 회원가입
