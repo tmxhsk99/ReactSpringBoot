@@ -38,7 +38,6 @@ public class PostController {
         return result;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/api/posts/{postId}")
     public PostResponse get(@PathVariable(name = "postId") Long id) {
         PostResponse postResponse = postService.get(id);

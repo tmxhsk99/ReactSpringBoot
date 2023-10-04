@@ -46,6 +46,9 @@ class PostControllerTest {
 
 
     @Test
+    @WithMockUser(username = "admin@unchained.com",
+            roles = {"ADMIN"}
+    )
     @DisplayName("글 작성시 제목에 '바보'는 포함 될 수 없다. ")
     public void ExceptionTest() throws Exception {
         //given
@@ -66,6 +69,9 @@ class PostControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin@unchained.com",
+            roles = {"ADMIN"}
+    )
     @DisplayName("글 삭제 테스트")
     void postDelete() throws Exception {
         //given
@@ -86,6 +92,9 @@ class PostControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin@unchained.com",
+            roles = {"ADMIN"}
+    )
     @DisplayName("글 제목 수정")
     void postEdit() throws Exception {
         //given
@@ -167,8 +176,7 @@ class PostControllerTest {
 
     @Test
     @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"},
-            password = "1234"
+            roles = {"ADMIN"}
     )
     @DisplayName("요청자 권한이 ADMIN인 경우 글작성 요청 시 글이 저장된다.")
     void sendJson_db_save() throws Exception {
