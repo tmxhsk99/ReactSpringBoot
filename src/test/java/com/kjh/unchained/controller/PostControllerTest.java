@@ -45,28 +45,6 @@ class PostControllerTest {
     }
 
 
-    @Test
-    @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"}
-    )
-    @DisplayName("글 작성시 제목에 '바보'는 포함 될 수 없다. ")
-    public void ExceptionTest() throws Exception {
-        //given
-        PostCreate request = PostCreate.builder()
-                .title("kjh 바보")
-                .content("content")
-                .build();
-
-        String json = objectMapper.writeValueAsString(request);
-
-        //when
-        mockMvc.perform(post("/api/posts")
-                        .contentType(APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isBadRequest())
-                .andDo(print());
-
-    }
 
     @Test
     @WithMockUser(username = "admin@unchained.com",

@@ -47,7 +47,6 @@ public class PostController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/posts")
     public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
-        request.validate();
         postService.write(request);
     }
 
