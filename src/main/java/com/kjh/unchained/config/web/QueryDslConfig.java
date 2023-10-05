@@ -1,4 +1,4 @@
-package com.kjh.unchained.springconfig.web;
+package com.kjh.unchained.config.web;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

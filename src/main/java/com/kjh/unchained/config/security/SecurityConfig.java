@@ -1,13 +1,13 @@
-package com.kjh.unchained.springconfig.security;
+package com.kjh.unchained.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.domain.User;
 import com.kjh.unchained.repository.jpa.user.UserRepository;
-import com.kjh.unchained.springconfig.security.filter.EmailPasswordAuthFilter;
-import com.kjh.unchained.springconfig.security.handler.Http401Handler;
-import com.kjh.unchained.springconfig.security.handler.Http403Handler;
-import com.kjh.unchained.springconfig.security.handler.LoginFailHandler;
-import com.kjh.unchained.springconfig.security.handler.LoginSuccessHandler;
+import com.kjh.unchained.config.security.filter.EmailPasswordAuthFilter;
+import com.kjh.unchained.config.security.handler.Http401Handler;
+import com.kjh.unchained.config.security.handler.Http403Handler;
+import com.kjh.unchained.config.security.handler.LoginFailHandler;
+import com.kjh.unchained.config.security.handler.LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;

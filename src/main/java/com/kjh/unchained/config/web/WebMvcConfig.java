@@ -1,6 +1,6 @@
-package com.kjh.unchained.springconfig.web;
+package com.kjh.unchained.config.web;
 
-import com.kjh.unchained.springconfig.app.JwtAppConfig;
+import com.kjh.unchained.config.app.JwtAppConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

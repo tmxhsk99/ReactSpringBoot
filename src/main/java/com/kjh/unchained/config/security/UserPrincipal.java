@@ -1,4 +1,4 @@
-package com.kjh.unchained.springconfig.security;
+package com.kjh.unchained.config.security;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

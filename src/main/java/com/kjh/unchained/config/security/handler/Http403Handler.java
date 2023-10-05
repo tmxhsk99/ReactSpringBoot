@@ -1,4 +1,4 @@
-package com.kjh.unchained.springconfig.security.handler;
+package com.kjh.unchained.config.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kjh.unchained.response.ErrorResponse;

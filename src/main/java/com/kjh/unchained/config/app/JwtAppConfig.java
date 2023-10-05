@@ -1,4 +1,4 @@
-package com.kjh.unchained.springconfig.app;
+package com.kjh.unchained.config.app;
 
 import lombok.Getter;
 

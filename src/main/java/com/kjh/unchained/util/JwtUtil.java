@@ -1,6 +1,6 @@
 package com.kjh.unchained.util;
 
-import com.kjh.unchained.springconfig.app.JwtAppConfig;
+import com.kjh.unchained.config.app.JwtAppConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
