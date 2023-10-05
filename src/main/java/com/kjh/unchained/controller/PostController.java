@@ -19,16 +19,11 @@ public class PostController {
     private final PostService postService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/api/posts/{postId}")
-    public void delete(@PathVariable long postId) {
-        postService.delete(postId);
+    @PostMapping("/api/posts")
+    public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
+        postService.write(request);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PatchMapping("/api/posts/{postId}")
-    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request) {
-        return postService.edit(postId, request);
-    }
 
     @GetMapping("/api/posts")
     public PostListResponse getList(@ModelAttribute @Valid PostSearch postSearch) {
@@ -45,9 +40,15 @@ public class PostController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/api/posts")
-    public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
-        postService.write(request);
+    @PatchMapping("/api/posts/{postId}")
+    public PostResponse edit(@PathVariable long postId, @RequestBody @Valid PostEdit request) {
+        return postService.edit(postId, request);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/api/posts/{postId}")
+    public void delete(@PathVariable long postId) {
+        postService.delete(postId);
     }
 
 }
