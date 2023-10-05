@@ -35,7 +35,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity(debug = true)
-@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
