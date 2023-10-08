@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,6 +28,9 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     private LocalDateTime createdTime;
 
@@ -57,4 +61,8 @@ public class Post {
         return this.user.getId();
     }
 
+    public void addComment(Comment comment) {
+        comment.setPost(this);
+        this.comments.add(comment);
+    }
 }
