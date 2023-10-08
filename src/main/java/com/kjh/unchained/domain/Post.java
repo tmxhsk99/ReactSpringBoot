@@ -24,14 +24,19 @@ public class Post {
     @Lob    //DB 저장시에는 LongText
     private String content;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
     private LocalDateTime createdTime;
 
     private LocalDateTime updatedTime;
 
     @Builder
-    public Post(String title, String content) {
+    public Post(String title, String content, User user) {
         this.title = title;
         this.content = content;
+        this.user = user;
         this.createdTime = LocalDateTime.now();
         this.updatedTime = LocalDateTime.now();
     }
@@ -46,6 +51,10 @@ public class Post {
         this.title = postEditor.getTitle();
         this.content = postEditor.getContent();
         this.updatedTime = postEditor.getUpdatedTime();
+    }
+
+    public Long getUserId() {
+        return this.user.getId();
     }
 
 }

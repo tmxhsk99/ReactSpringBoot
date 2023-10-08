@@ -1,5 +1,6 @@
 package com.kjh.unchained.controller;
 
+import com.kjh.unchained.config.security.UserPrincipal;
 import com.kjh.unchained.request.post.PostCreate;
 import com.kjh.unchained.request.post.PostEdit;
 import com.kjh.unchained.request.post.PostSearch;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -20,8 +22,9 @@ public class PostController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/api/posts")
-    public void posts_save(@RequestBody @Valid PostCreate request) throws Exception {
-        postService.write(request);
+    public void posts_save(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                           @RequestBody @Valid PostCreate request) throws Exception {
+        postService.write(userPrincipal.getUserId(), request);
     }
 
 
@@ -45,7 +48,8 @@ public class PostController {
         return postService.edit(postId, request);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') && hasPermission(#postId,'POST','DELETE')")
     @DeleteMapping("/api/posts/{postId}")
     public void delete(@PathVariable long postId) {
         postService.delete(postId);

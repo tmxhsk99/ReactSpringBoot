@@ -2,11 +2,11 @@ package com.kjh.unchained.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class UserNotFoundException extends MyBaseException {
+public class UserNotFound extends MyBaseException {
 
-    private static final String MESSAGE = "존재하지 않는 유저입니다.";
+    private static final String MESSAGE = "존재하지 않는 사용자입니다.";
 
-    public UserNotFoundException() {
+    public UserNotFound() {
         super(MESSAGE);
     }
 

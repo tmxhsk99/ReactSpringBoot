@@ -2,8 +2,11 @@ package com.kjh.unchained.service;
 
 import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.domain.PostEditor;
+import com.kjh.unchained.domain.User;
 import com.kjh.unchained.exception.PostNotFound;
+import com.kjh.unchained.exception.UserNotFound;
 import com.kjh.unchained.repository.jpa.post.PostRepository;
+import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.post.PostCreate;
 import com.kjh.unchained.request.post.PostEdit;
 import com.kjh.unchained.request.post.PostSearch;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PostService {
+
+    private final UserRepository userRepository;
+
     private final PostRepository postRepository;
 
     @Transactional
@@ -41,11 +47,15 @@ public class PostService {
         return new PostResponse(post);
     }
 
-    public Long write(PostCreate postCreateDto) {
+    public Long write(Long userId, PostCreate postCreateDto) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(UserNotFound::new);
 
         Post post = Post.builder()
                 .title(postCreateDto.getTitle())
                 .content(postCreateDto.getContent())
+                .user(user)
                 .build();
 
         return postRepository.save(post).getId();
