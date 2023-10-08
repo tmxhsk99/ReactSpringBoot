@@ -1,9 +1,12 @@
 package com.kjh.unchained.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kjh.unchained.config.UnchainedMockUser;
 import com.kjh.unchained.domain.Post;
 import com.kjh.unchained.repository.jpa.post.PostRepository;
+import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.post.PostCreate;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -41,6 +43,16 @@ public class PostControllerDocTest {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Test
+    @AfterEach
+    void clean() {
+        postRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("글 단건 조회 테스트")
@@ -72,10 +84,9 @@ public class PostControllerDocTest {
 
     @Test
     @DisplayName("글 등록 테스트")
-    @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"}
-    )
+    @UnchainedMockUser
     void RestDocsTest_post_save() throws Exception {
+
         //given
         PostCreate request = PostCreate.builder()
                 .title("글제목")

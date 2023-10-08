@@ -1,17 +1,20 @@
 package com.kjh.unchained.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kjh.unchained.config.UnchainedMockUser;
 import com.kjh.unchained.domain.Post;
+import com.kjh.unchained.domain.User;
 import com.kjh.unchained.repository.jpa.post.PostRepository;
+import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.post.PostCreate;
 import com.kjh.unchained.request.post.PostEdit;
-import org.junit.jupiter.api.BeforeEach;
+import com.kjh.unchained.testutil.fixture.AuthFixture;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -38,24 +41,28 @@ class PostControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    UserRepository userRepository;
 
-    @BeforeEach
+
+    @AfterEach
     void clean() {
         postRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
 
-
     @Test
-    @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"}
-    )
+    @UnchainedMockUser
     @DisplayName("글 삭제 테스트")
     void postDelete() throws Exception {
         //given
+        User user = userRepository.findAll().get(0);
+
         Post post = Post.builder()
                 .title("kjh")
                 .content("content")
+                .user(user)
                 .build();
 
         postRepository.save(post);
@@ -70,15 +77,16 @@ class PostControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"}
-    )
+    @UnchainedMockUser
     @DisplayName("글 제목 수정")
     void postEdit() throws Exception {
+        User user = userRepository.findAll().get(0);
+
         //given
         Post post = Post.builder()
                 .title("kjh")
                 .content("content")
+                .user(user)
                 .build();
 
         postRepository.save(post);
@@ -134,9 +142,14 @@ class PostControllerTest {
     @DisplayName("글 1개 조회")
     void get_post() throws Exception {
         //given
+
+        User validUser = AuthFixture.getValidUser();
+        userRepository.save(validUser);
+
         Post post = Post.builder()
                 .title("goo")
                 .content("gle")
+                .user(validUser)
                 .build();
         postRepository.save(post);
 
@@ -153,9 +166,7 @@ class PostControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin@unchained.com",
-            roles = {"ADMIN"}
-    )
+    @UnchainedMockUser
     @DisplayName("요청자 권한이 ADMIN인 경우 글작성 요청 시 글이 저장된다.")
     void sendJson_db_save() throws Exception {
         //given

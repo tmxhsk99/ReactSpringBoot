@@ -1,13 +1,16 @@
 package com.kjh.unchained.service;
 
 import com.kjh.unchained.domain.Post;
+import com.kjh.unchained.domain.User;
 import com.kjh.unchained.exception.PostNotFound;
 import com.kjh.unchained.repository.jpa.post.PostRepository;
+import com.kjh.unchained.repository.jpa.user.UserRepository;
 import com.kjh.unchained.request.post.PostCreate;
 import com.kjh.unchained.request.post.PostEdit;
 import com.kjh.unchained.request.post.PostSearch;
 import com.kjh.unchained.response.PostListResponse;
 import com.kjh.unchained.response.PostResponse;
+import com.kjh.unchained.testutil.fixture.AuthFixture;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +32,16 @@ class PostServiceTest {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     @BeforeEach
     void setting() {
+
         postRepository.deleteAll();
+        userRepository.deleteAll();
+
     }
 
 
@@ -228,18 +237,27 @@ class PostServiceTest {
     @DisplayName("PostService 글 작성 테스트")
     void post_save_test() {
         //given
-        PostCreate post = PostCreate.builder()
+        var user = User.builder()
+                .name(AuthFixture.VALID_NAME)
+                .email(AuthFixture.VALID_EMAIL)
+                .password(AuthFixture.VALID_PASSWORD)
+                .build();
+
+        userRepository.save(user);
+
+
+        PostCreate postCreate = PostCreate.builder()
                 .title("제목입니다.")
                 .content("내용입니다.")
                 .build();
 
         //when
-        postService.write(post);
+        postService.write(user.getId(), postCreate);
 
         //then
         assertThat(postRepository.count()).isEqualTo(1L);
-        assertThat(post.getTitle()).isEqualTo("제목입니다.");
-        assertThat(post.getContent()).isEqualTo("내용입니다.");
+        assertThat(postCreate.getTitle()).isEqualTo("제목입니다.");
+        assertThat(postCreate.getContent()).isEqualTo("내용입니다.");
 
     }
 
